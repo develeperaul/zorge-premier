@@ -1,40 +1,29 @@
 <template lang="pug"> .apartment-concepts
   ScrollPage(ref="scrollbar" :backgroundImage="require('../assets/images/engineering.jpg')")
     template(v-slot:first="")
-      .desc «Зорге.Премьер» – это современные инженерные системы, которые обеспечивают высочайший уровень безопасности и комфорта для каждого жильца.
-    .container
-      .row.mb-5.align-items-center
-        .col-md-7
+      .desc Zorge Premiere — это современные инженерные системы, которые обеспечивают высочайший уровень безопасности и комфорта для каждого жильца.
+    .container.engineering-container
+      .engineering-content.engineering-content-1
+        div: .engineering-picture-1.engineering-picture: .sizer
+        div
           .long-title(v-html="items[0].title")
           div(v-html="items[0].content")
-        .col-md-5: .engineering-picture-1.engineering-picture: .sizer
-      .row.mb-5.align-items-center
-        .col-md-5: .engineering-picture-2.engineering-picture: .sizer
-          .line-1
-          .line-2
-        .col-md-7
+      .engineering-content.engineering-content-2
+        div: .engineering-picture-2.engineering-picture: .sizer
+        div
           .long-title(v-html="items[1].title")
           div(v-html="items[1].content")
-      .row.mb-5.align-items-center
-        .col-md-7
+      .engineering-content.engineering-content-3
+        div: .engineering-picture-3.engineering-picture: .sizer
+        div
           .long-title(v-html="items[2].title")
           div(v-html="items[2].content")
-        .col-md-5: .engineering-picture-4.engineering-picture
-          .sizer
-          .line
-      .row.mb-5.align-items-center
-        .col-md-5: .engineering-picture-5.engineering-picture: .sizer
-        .col-md-7
+      .engineering-content.engineering-content-4
+        div: .engineering-picture-4.engineering-picture: .sizer
+        div
           .long-title(v-html="items[3].title")
           div(v-html="items[3].content")
-    .container
-      .row.mb-5.align-items-center
-        .col-md-7
-          .long-title(v-html="items[4].title")
-          div(v-html="items[4].content")
-        .col-md-5: .engineering-picture-8.engineering-picture: .sizer
-          .line-1
-          .line-2
+
 </template>
 
 <script>
@@ -82,82 +71,71 @@ export default {
   font-family 'Heading Pro Wide'
   +below(1340px)
     padding-left 60px
+.engineering-container
+  max-width: 1594px
+  display grid
+  grid-template-columns repeat(4,1fr)
+  gap 33px
+
+
+
+.engineering-content-1
+  grid-column 1 / 2
+  &:before
+    content ''
+    size 1075px
+    absolute right -175px top 195px
+    background url('./../assets/images/about-picture-17.png') no-repeat center/cover
+.engineering-content-2
+  grid-column 3 / 4
+
+
+.engineering-content-3
+  grid-column 2 / 3
+  margin-top -200px
+  &:before
+    content ''
+    size 367px
+    absolute left 130px top -250px
+
+    background url('./../assets/images/about-picture-18.png') no-repeat center/cover
+.engineering-content-4
+  grid-column 4 / 4
+  margin-top -200px
+  &:before
+    content ''
+    size 475px 953px
+    absolute left -280px top -241px
+    background url('./../assets/images/about-picture-19.png') no-repeat center/cover
+.engineering-content
+  position relative
+  display grid
+  gap 32px
+  width 374px
+  align-content start
+
+
+
+
 .engineering-picture-1
   z-index 1
-  size 522px
-  margin-left 40px
-  margin-top -40px
+  size 278.93px
+  position relative
+  background url('./../assets/images/engineering-picture-9.png') no-repeat center/cover
+.engineering-picture-2
+  size 278.93px
+  position relative
+  background url('./../assets/images/engineering-picture-8.png') no-repeat center/cover
+.engineering-picture-3
+  size 278.93px
   position relative
   background url('./../assets/images/engineering-picture-1.png') no-repeat center/cover
-.engineering-picture-2
-  size 522px
-  position relative
-  margin-left -40px
-  .line-1
-    size 100%
-    z-index 1
-    absolute left 0 top 0
-    background url('./../assets/images/engineering-picture-2.png') no-repeat center/cover
-  .line-2
-    size 488px
-    content ''
-    absolute right 50% top 100%
-    background url('./../assets/images/about-picture-5.png') no-repeat center/cover
-  &:before
-    size 688px
-    content ''
-    absolute left 100% bottom 50%
-    background url('./../assets/images/about-picture-5.png') no-repeat center/cover
-  &:after
-    content ''
-    size 387px
-    absolute left -260px bottom -114px
-    background url('./../assets/images/about-picture-3.png') no-repeat center/cover
 .engineering-picture-4
-  size 522px
-  margin-left 40px
+  size 278.93px
   position relative
-  .line
-    size 100%
-    z-index 1
-    content ''
-    absolute left 0 top 0
-    background url('./../assets/images/engineering-picture-4.png') no-repeat center/cover
-  &:before
-    content ''
-    size 1108px
-    absolute right 50% top 100%
-    background url('./../assets/images/about-picture-7.png') no-repeat center/cover
-  &:after
-    content ''
-    size 659px
-    absolute top 105px left 320px
-    background url('./../assets/images/about-picture-3.png') no-repeat center/cover
-.engineering-picture-5
-  size 522px
-  margin-left -40px
-  background url('./../assets/images/engineering-picture-5.png') no-repeat center/cover
-.engineering-picture-8
-  size 522px
-  margin-left 40px
-  position relative
-  &:after
-    size 100%
-    z-index 1
-    content ''
-    absolute left 0 top 0
-    background url('./../assets/images/engineering-picture-8.png') no-repeat center/cover
-  &:before
-    content ''
-    size 222px
-    absolute right -25px top -25px
-    background url('./../assets/images/about-picture-3.png') no-repeat center/cover
-  .line-1
-    size 730px
-    absolute right 100% bottom 50%
-    background url('./../assets/images/about-picture-9.png') no-repeat center/cover
-  .line-2
-    @extend .engineering-picture-4:before
+  background url('./../assets/images/engineering-picture-10.png') no-repeat center/cover
+
+
 .engineering-picture
   +below(1345px)
     size 100%
@@ -165,4 +143,12 @@ export default {
 .sizer
   +below(1345px)
     padding-top 100%
+  </style>
+<style >
+.engineering-content ul {
+
+  display: grid;
+  gap: 16px;
+  padding-left: 22px;
+}
 </style>
