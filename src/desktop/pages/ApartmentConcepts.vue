@@ -1,81 +1,32 @@
 <template lang="pug"> .apartment-concepts
   ScrollPage(ref="scrollbar" :backgroundImage="require('../assets/images/apartment-concepts.jpg')")
     .container
-      .row.mb-5.align-items-center
-        .col-md-7
+      .row.mb-5.align-items-center.apartment-concepts-content.apartment-concepts-content-1
+        div.apartment-concepts-content__text
           .long-title(v-html="items[0].title")
-          div(v-html="items[0].content")
-          router-link.link(:to="items[0].button.link" exact)
-            svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
-            .link__text {{ items[0].button.text }}
-        .col-md-5: .apartment-concepts-picture-1.apartment-concepts-picture: .sizer
-      .row.mb-5.align-items-center
-        .col-md-5: .apartment-concepts-picture-2.apartment-concepts-picture: .sizer
+          .text(v-html="items[0].content")
+          //- router-link.link(:to="items[0].button.link" exact)
+          //-   svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
+          //-   .link__text {{ items[0].button.text }}
+        div
+         .apartment-concepts-picture-1.apartment-concepts-picture: .sizer
+      .row.mb-5.align-items-center.apartment-concepts-content.apartment-concepts-content-2
+        div: .apartment-concepts-picture-2.apartment-concepts-picture: .sizer
           .line-1
           .line-2
-        .col-md-7
+        .apartment-concepts-content__text
           .long-title(v-html="items[1].title")
-          div(v-html="items[1].content")
-      .row.mb-5.align-items-center
-        .col-md-7
+          .text(v-html="items[1].content")
+      .row.mb-5.align-items-center.apartment-concepts-content.apartment-concepts-content-3
+        .apartment-concepts-content__text
           .long-title(v-html="items[2].title")
-          div(v-html="items[2].content")
-        .col-md-5: .apartment-concepts-picture-4.apartment-concepts-picture
+          .text(v-html="items[2].content")
+        div: .apartment-concepts-picture-4.apartment-concepts-picture
           .sizer
           .line
-      .row.mb-5.align-items-center
-        .col-md-5: .apartment-concepts-picture-5.apartment-concepts-picture: .sizer
-        .col-md-7
-          .long-title(v-html="items[3].title")
-          div(v-html="items[3].content")
+
     .apartment-concepts-bg-full-1.mb-5
-    .container
-      .row.mb-5.align-items-center
-        .col-md-7
-          .long-title(v-html="items[4].title")
-          div(v-html="items[4].content")
-        .col-md-5: .apartment-concepts-picture-8.apartment-concepts-picture: .sizer
-          .line-1
-          .line-2
-      .row.mb-5.align-items-center
-        .col-md-5: .apartment-concepts-picture-10.apartment-concepts-picture: .sizer
-        .col-md-7
-          .long-title(v-html="items[5].title")
-          div(v-html="items[5].content")
-      .row.mb-5.align-items-center
-        .col-md-7
-          .long-title(v-html="items[6].title")
-          div(v-html="items[6].content")
-        .col-md-5: .apartment-concepts-picture-11.apartment-concepts-picture: .sizer
-          .line-1
-          .line-2
-    .apartment-concepts-bg-full-2.mb-5
-    .container
-      .row.mb-5.align-items-center
-        .col-md-5: .apartment-concepts-picture-12.apartment-concepts-picture: .sizer
-          .line-1
-        .col-md-7
-          .long-title(v-html="items[7].title")
-          div(v-html="items[7].content")
-      .row.mb-5.align-items-center
-        .col-md-7
-          .long-title(v-html="items[8].title")
-          div(v-html="items[8].content")
-          //- router-link.link(:to="items[8].button.link" exact)
-          //-   svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
-          //-   .link__text {{ items[8].button.text }}
-        .col-md-5: .apartment-concepts-picture-13.apartment-concepts-picture: .sizer
-      //- .row.mb-5.align-items-center
-      //-   .col-md-5: .apartment-concepts-picture-14.apartment-concepts-picture: .sizer
-      //-     .line-1
-        //- .col-md-7
-        //-   .long-title(v-html="items[9].title")
-        //-   div(v-html="items[9].content")
-      .row.mb-5.align-items-center
-        .col-md-5: .apartment-concepts-picture-15.apartment-concepts-picture: .sizer
-        .col-md-7
-          .long-title(v-html="items[10].title")
-          div(v-html="items[10].content")
+
 </template>
 
 <script>
@@ -110,22 +61,40 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+.apartment-concepts-content-1
+  display grid
+  grid-template-columns 1fr 1fr
+
+.apartment-concepts-content.apartment-concepts-content-1 .apartment-concepts-content__text
+  padding-left 162px
+.apartment-concepts-content .apartment-concepts-content__text .text
+  color #B9B9B9
+
+.apartment-concepts-content-1 .apartment-concepts-content__text .text
+  max-width 465px
 .apartment-concepts-picture-1
   z-index 1
-  size 522px
-  margin-left 40px
-  margin-top -40px
+  size 783px
   position relative
-  background url('./../assets/images/apartment-concepts-picture-1-1.png') no-repeat center/cover
+  background url('./../assets/images/apartment-concepts-picture-12.png') no-repeat center/cover
+
+.apartment-concepts-content-2
+  display grid
+  grid-template-columns 458px 1fr
+  max-width 1270px
+  margin 0 auto
+.apartment-concepts-content-2 .apartment-concepts-content__text
+  width 480px
+  margin-left 192px
 .apartment-concepts-picture-2
-  size 522px
+  size 458px
   position relative
-  margin-left -40px
+
   .line-1
     size 100%
     z-index 1
     absolute left 0 top 0
-    background url('./../assets/images/apartment-concepts-picture-2.png') no-repeat center/cover
+    background url('./../assets/images/apartment-concepts-picture-15.png') no-repeat center/cover
   .line-2
     size 488px
     content ''
@@ -134,23 +103,34 @@ export default {
   &:before
     size 688px
     content ''
-    absolute left 100% bottom 50%
+    absolute left 35% bottom 50%
     background url('./../assets/images/about-picture-5.png') no-repeat center/cover
   &:after
     content ''
-    size 387px
-    absolute left -260px bottom -114px
+    size 641px
+    absolute left -460px bottom -230px
     background url('./../assets/images/about-picture-3.png') no-repeat center/cover
+
+.apartment-concepts-content-3
+  display grid
+  grid-template-columns 1fr 620px
+  max-width 1270px
+  margin 0 auto
+
+.apartment-concepts-content-3 .apartment-concepts-content__text
+  width 494px
+
+
 .apartment-concepts-picture-4
-  size 522px
-  margin-left 40px
+  size 620px
+
   position relative
   .line
     size 100%
     z-index 1
     content ''
     absolute left 0 top 0
-    background url('./../assets/images/apartment-concepts-picture-4.png') no-repeat center/cover
+    background url('./../assets/images/apartment-concepts-picture-16.png') no-repeat center/cover
   &:before
     content ''
     size 1108px
@@ -158,8 +138,8 @@ export default {
     background url('./../assets/images/about-picture-7.png') no-repeat center/cover
   &:after
     content ''
-    size 659px
-    absolute top 105px left 320px
+    size 850px
+    absolute top -105px left 380px
     background url('./../assets/images/about-picture-3.png') no-repeat center/cover
 .apartment-concepts-picture-5
   size 522px
@@ -169,7 +149,7 @@ export default {
   z-index 1
   size 100% 628px
   position relative
-  background url('./../assets/images/apartment-concepts-bg-full-1.jpg') no-repeat center/cover
+  background url('./../assets/images/apartment-concepts-bg-full-3.png') no-repeat center/cover
   &:before
     content ''
     size 215px
