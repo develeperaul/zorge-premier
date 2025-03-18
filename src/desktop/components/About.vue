@@ -2,16 +2,17 @@
   ScrollPage(:title="title" ref="scrollbar")
     proposed-page(to="/select") Выбор квартир
     .container
-      .row.mb-5.align-items-center
-        .col-md-7
+      .about-content.about-content-1.mb-5.align-items-center
+        div.content
           .long-title {{ $store.getters['about/block1'].title }}
           div(v-html="$store.getters['about/block1'].desc") {{ $store.getters['about/block1'].desc }}
-        .col-md-5: .about-picture-1.about-picture: .sizer
-      .row.mb-5.align-items-center
-        .col-md-5: .about-picture-2.about-picture: .sizer
-          .line-1
-          .line-2
-        .col-md-7
+
+        img.about-picture.about-picture-1(alt src="./../assets/images/about-picture-20.png")
+
+      .about-content.about-content-2.mb-5.align-items-center
+
+        img.about-picture-2.about-picture(alt src="./../assets/images/about-picture-21.png")
+        div.content
           .long-title {{ $store.getters['about/block2'].title }}
           div(v-html="$store.getters['about/block2'].desc") {{ $store.getters['about/block2'].desc }}
           router-link.link(
@@ -21,8 +22,8 @@
           )
             svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
             .link__text {{ $store.getters['about/block2'].button.text }}
-      .row.mb-5.align-items-center
-        .col-md-7
+      .about-content.about-content-3.mb-5.align-items-center
+        .content
           .long-title {{ $store.getters['about/block3'].title }}
           div(v-html="$store.getters['about/block3'].desc") {{ $store.getters['about/block3'].desc }}
           router-link.link(
@@ -32,90 +33,94 @@
           )
             svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
             .link__text {{ $store.getters['about/block3'].button.text }}
-        .col-md-5: .about-picture-4.about-picture
-          .sizer
-          .line
+        img.about-picture-4.about-picture(alt src="./../assets/images/about-picture-22.png")
 
-      .row.mb-5.align-items-center
-        .col-md-5: .about-picture-8.about-picture: .sizer
-          .line-1
-          .line-2
-        .col-md-7
-          .long-title {{ $store.getters['about/block5'].title }}
-          div(v-html="$store.getters['about/block5'].desc") {{ $store.getters['about/block5'].desc }}
-          router-link.link(:to="$store.getters['about/block5'].button.link" exact)
-            svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
-            .link__text {{ $store.getters['about/block5'].button.text }}
-    .about-bg-full-1.mb-5
-    .container
-      .row.mb-5.align-items-center
-        .col-md-7
+      .about-content.about-content-4.mb-5.align-items-center
+
+        img.about-picture-8.about-picture(alt src="./../assets/images/about-picture-8.png")
+        .content
           .long-title {{ $store.getters['about/block4'].title }}
           div(v-html="$store.getters['about/block4'].desc") {{ $store.getters['about/block4'].desc }}
           router-link.link(:to="$store.getters['about/block4'].button.link" exact)
             svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
             .link__text {{ $store.getters['about/block4'].button.text }}
-        .col-md-5: .about-picture-5.about-picture: .sizer
-      .row.mb-5.align-items-center
-        .col-md-5: .about-picture-10.about-picture: .sizer
-        .col-md-7
-          .long-title {{ $store.getters['about/block6'].title }}
-          div(v-html="$store.getters['about/block6'].desc") {{ $store.getters['about/block6'].desc }}
-          .link(@click="$refs.modalClosedTerritory.open()")
+    .about-bg-full-1.mb-5
+    .container
+      .about-content.about-content-5.mb-5.align-items-center
+        .content
+          .long-title {{ $store.getters['about/block5'].title }}
+          div(v-html="$store.getters['about/block5'].desc") {{ $store.getters['about/block5'].desc }}
+          router-link.link(:to="$store.getters['about/block5'].button.link" exact)
             svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
-            .link__text {{ $store.getters['about/block6'].button.text }}
-      .row.mb-5.align-items-center
-        .col-md-7
+            .link__text {{ $store.getters['about/block5'].button.text }}
+
+        img.about-picture-5.about-picture(alt src="./../assets/images/about-picture-24.png")
+      .about-content.about-content-6.mb-5.align-items-center
+
+        img.about-picture-10.about-picture(alt src="./../assets/images/about-picture-25.png")
+        .content
+          .long-title {{ $store.getters['about/block6'].title }}
+          div(v-html="$store.getters['about/block6'].desc") {{ $store.getters['about/block7'].desc }}
+
+
+      .about-content.about-content-7.mb-5.align-items-center
+        .content
           .long-title {{ $store.getters['about/block7'].title }}
-          div(v-html="$store.getters['about/block7'].desc") {{ $store.getters['about/block7'].desc }}
+          div(v-html="$store.getters['about/block7'].desc") {{ $store.getters['about/block6'].desc }}
           router-link.link(:to="$store.getters['about/block7'].button.link" exact)
             svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
             .link__text {{ $store.getters['about/block7'].button.text }}
-        .col-md-5: .about-picture-11.about-picture: .sizer
-          .line-1
-          .line-2
-    .about-bg-full-2.mb-5
-    .container
-      .row.mb-5.align-items-center
-        .col-md-5: .about-picture-12.about-picture: .sizer
-          .line-1
-        .col-md-7
+
+        img.about-picture-5.about-picture(alt src="./../assets/images/about-picture-26.png")
+
+      .about-content.about-content-8.mb-5.align-items-center
+
+        img.about-picture-2.about-picture(alt src="./../assets/images/about-picture-27.png")
+        div.content
           .long-title {{ $store.getters['about/block8'].title }}
-          div(v-html="$store.getters['about/block8'].desc") {{ $store.getters['about/block8'].desc }}
-      .row.mb-5.align-items-center
-        .col-md-7
-          .long-title {{ $store.getters['about/block9'].title }}
-          div(v-html="$store.getters['about/block9'].desc") {{ $store.getters['about/block9'].desc }}
-          router-link.link(:to="$store.getters['about/block9'].button.link" exact)
+          div(v-html="$store.getters['about/block8'].desc") {{ $store.getters['about/block2'].desc }}
+          router-link.link(
+            v-if="$store.getters['about/block9'].button.text"
+            :to="$store.getters['about/block9'].button.link"
+            exact
+          )
             svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
             .link__text {{ $store.getters['about/block9'].button.text }}
-        .col-md-5: .about-picture-13.about-picture: .sizer
-      .row.mb-5.align-items-center
-        .col-md-5: .about-picture-16.about-picture: .sizer
-          .line-1
-        .col-md-7
+      .about-content.about-content-9.mb-5.align-items-center
+        div.content
           .long-title {{ $store.getters['about/block10'].title }}
-          div(v-html="$store.getters['about/block10'].desc") {{ $store.getters['about/block10'].desc }}
-          router-link.link(:to="$store.getters['about/block10'].button.link" exact)
+          div(v-html="$store.getters['about/block10'].desc") {{ $store.getters['about/block1'].desc }}
+          router-link.link(
+            v-if="$store.getters['about/block10'].button.text"
+            :to="$store.getters['about/block10'].button.link"
+            exact
+          )
             svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
             .link__text {{ $store.getters['about/block10'].button.text }}
-      .row.mb-5.align-items-center
-        .col-md-7
+        img.about-picture.about-picture-1(alt src="./../assets/images/about-picture-28.png")
+      .about-content.about-content-10.mb-5.align-items-center
+
+        img.about-picture-2.about-picture(alt src="./../assets/images/about-picture-29.png")
+        div.content
           .long-title {{ $store.getters['about/block11'].title }}
-          div(v-html="$store.getters['about/block11'].desc") {{ $store.getters['about/block11'].desc }}
-          router-link.link(:to="$store.getters['about/block11'].button.link" exact)
+          div(v-html="$store.getters['about/block11'].desc") {{ $store.getters['about/block2'].desc }}
+          router-link.link(
+            v-if="$store.getters['about/block11'].button.text"
+            :to="$store.getters['about/block11'].button.link"
+            exact
+          )
             svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
             .link__text {{ $store.getters['about/block11'].button.text }}
-        .col-md-5: .about-picture-15.about-picture: .sizer
-      .row.mb-5.align-items-center
-        .col-md-5: .about-picture-14.about-picture: .sizer
-          .line-1
-        .col-md-7
+      .about-content.about-content-11.mb-5.align-items-center
+        .content
           .long-title {{ $store.getters['about/block12'].title }}
-          div(v-html="$store.getters['about/block12'].desc") {{ $store.getters['about/block12'].desc }}
+          div(v-html="$store.getters['about/block12'].desc") {{ $store.getters['about/block6'].desc }}
           router-link.link(:to="$store.getters['about/block12'].button.link" exact)
             svg.link__svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
             .link__text {{ $store.getters['about/block12'].button.text }}
+
+        img.about-picture-5.about-picture(alt src="./../assets/images/about-picture-30.png")
+
   ModalRightToLeft(title="Закрытая территория" ref="modalClosedTerritory")
     .modal-wrapper
       img(alt src="../assets/images/bg-modal-closed-territory-2.jpg")
@@ -162,28 +167,105 @@ export default {
   top calc(100vh - 105px)
   position absolute!important
   padding 14px 12px 12px!important
+.about-content
+  display grid
+  grid-template-columns 1fr 1fr
+.about-content-1
+
+  padding-left 162px
+  gap 29px
+.about-content-1 .content
+  width 620px
+.about-content-1 .about-picture
+  margin-right -162px
+.about-content-2
+  grid-template-columns minmax(0,calc(100% - 783px)) minmax(480px,1fr)
+  padding-left 162px
+.about-content-2 .content
+  width 480px
+
+.about-content-3
+  grid-template-columns minmax(494px,1fr) minmax(0,783px)
+  gap 29px
+  padding-left 162px
+.about-content-3 .content
+  width 494px
+
+.about-content-4
+  grid-template-columns minmax(0,783px) minmax(586px,1fr)
+  margin-right 33px
+.about-content-4 .content
+  width 586px
+  justify-self end
+
+
+.about-content-5
+  grid-template-columns minmax(0,calc(100% - 783px)) minmax(480px,1fr)
+  padding-left 162px
+.about-content-5 .content
+  width 480px
+
+.about-content-6
+  grid-template-columns minmax(0,783px) minmax(586px,1fr)
+  margin-right 33px
+.about-content-6 .content
+  width 586px
+  justify-self end
+
+
+.about-content-7
+  grid-template-columns minmax(0,calc(100% - 783px)) minmax(480px,1fr)
+  padding-left 162px
+.about-content-7 .content
+  width 480px
+
+
+.about-content-8
+  grid-template-columns minmax(0,calc(100% - 783px)) minmax(480px,1fr)
+  padding-left 162px
+.about-content-8 .content
+  width 480px
+
+.about-content-9
+
+  padding-left 162px
+  gap 29px
+.about-content-9 .content
+  width 620px
+.about-content-9 .about-picture
+  margin-right -162px
+
+.about-content-10
+  grid-template-columns minmax(0,calc(100% - 783px)) minmax(480px,1fr)
+  padding-left 162px
+.about-content-10 .content
+  width 480px
+
+.about-content-11
+  grid-template-columns minmax(0,calc(100% - 783px)) minmax(480px,1fr)
+  padding-left 162px
+.about-content-11 .content
+  width 480px
+
+
+
 .about-picture-1
   z-index 1
-  size 484px 459px
-  margin-left 40px
-  margin-top -40px
+  size 100%
+  max-width 783px
+  object-fit contain
+
+
   position relative
-  background url('./../assets/images/about-picture-1.png') no-repeat center/cover
+
 .about-picture-2
-  size 522px
+  size 100%
+  max-width 458px
+  object-fit cover
   position relative
-  margin-left -40px
-  .line-1
-    size calc(100% - 20px)
-    z-index 1
-    absolute left 0 top 0
-    border-radius: 50%
-    background url('./../assets/images/about-picture-2.jpg') no-repeat center/cover
-  .line-2
-    size 488px
-    content ''
-    absolute right 50% top 100%
-    background url('./../assets/images/about-picture-5.png') no-repeat center/cover
+
+
+
   &:before
     size 688px
     content ''
@@ -195,16 +277,9 @@ export default {
     absolute left -260px bottom -114px
     background url('./../assets/images/about-picture-3.png') no-repeat center/cover
 .about-picture-4
-  size 522px
-  margin-left 40px
+  size 100%
+  max-width 620px
   position relative
-  .line
-    size 100%
-    z-index 1
-    content ''
-    absolute left 0 top 0
-    border-radius: 50%
-    background url('/static/gallery/architecture/render-8.jpg') no-repeat center/cover
   &:before
     content ''
     size 1108px
@@ -216,15 +291,13 @@ export default {
     absolute top 105px left 320px
     background url('./../assets/images/about-picture-3.png') no-repeat center/cover
 .about-picture-5
-  size 522px
-  margin-left 40px
-  border-radius: 50%
-  background url('./../assets/images/about-picture-6.jpg') no-repeat center/cover
+  size 100%
+  max-width 620px
 .about-bg-full-1
   z-index 1
-  size 100% 628px
+  size 100% 1080px
   position relative
-  background url('/static/gallery/architecture/render-2(2).jpg') no-repeat center/cover
+  background url('./../assets/images/about-render-3.png') no-repeat center/cover
   &:before
     content ''
     size 215px
@@ -232,9 +305,9 @@ export default {
     absolute left 0 top 100%
     background url('./../assets/images/about-picture-3.png') no-repeat center/cover
 .about-picture-8
-  size 522px
-  margin-left -40px
-  position relative
+  size 100%
+  max-width 783px
+
   &:after
     size 100%
     z-index 1
@@ -253,17 +326,11 @@ export default {
   .line-2
     @extend .about-picture-4:before
 .about-picture-10
-  size 500px
-  margin-left -40px
+  size 100%
+  max-width 783px
   position relative
-  border-radius: 50%
-  background url('./../assets/images/about-picture-10-1.png') no-repeat center/cover
-  &:before
-    @extend .about-picture-2 .line-2
-    top auto
-    right 100%
-    bottom 50%
-    transform rotate(90deg)
+
+
 .about-picture-11
   size 522px
   margin-left 40px
@@ -298,12 +365,7 @@ export default {
     left auto
     top 54px
     right 144px
-  .line-1
-    @extend .about-picture-2 .line-2
-    top 50%
-    left 100%
-    right auto
-    transform: rotate(-90deg)
+
 .about-picture-16
   @extend .about-picture-12
   &:before
@@ -319,12 +381,7 @@ export default {
   margin-left 40px
   position relative
   background url('./../assets/images/about-picture-13.png') no-repeat center/cover
-  &:before
-    @extend .about-picture-2 .line-2
-    top auto
-    left 100%
-    right auto
-    bottom 50%
+
 .about-picture-14
   size 522px
   margin-left -40px

@@ -35,18 +35,6 @@
       ).event-button
         svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
         | {{ $store.getters['about/block3'].button.text }}
-    .about-collage-5.about-item
-      .about-collage-5__image
-      .second-title {{ $store.getters['about/block5'].title }}
-      .about-content(v-html="$store.getters['about/block5'].desc") {{ $store.getters['about/block5'].desc }}
-      router-link(
-        v-if="$store.getters['about/block5'].button.text"
-        :to="$store.getters['about/block5'].button.link"
-        exact
-      ).event-button
-        svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
-        | {{ $store.getters['about/block5'].button.text }}
-    .about-full-bg.about-full-bg-1
     .about-collage-4.about-item
       .about-collage-4__image
       .second-title {{ $store.getters['about/block4'].title }}
@@ -58,6 +46,19 @@
       ).event-button
         svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
         | {{ $store.getters['about/block4'].button.text }}
+    .about-full-bg.about-full-bg-1
+    .about-collage-5.about-item
+      .about-collage-5__image
+      .second-title {{ $store.getters['about/block5'].title }}
+      .about-content(v-html="$store.getters['about/block5'].desc") {{ $store.getters['about/block4'].desc }}
+      router-link(
+        v-if="$store.getters['about/block5'].button.text"
+        :to="$store.getters['about/block5'].button.link"
+        exact
+      ).event-button
+        svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
+        | {{ $store.getters['about/block5'].button.text }}
+
     .about-collage-6.about-item
       .about-collage-6__image
       .second-title {{ $store.getters['about/block6'].title }}
@@ -76,7 +77,7 @@
       ).event-button
         svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
         | {{ $store.getters['about/block7'].button.text }}
-    .about-full-bg.about-full-bg-2
+
     .about-collage-8.about-item
       .about-collage-8__image
       .second-title {{ $store.getters['about/block8'].title }}
@@ -92,21 +93,10 @@
       ).event-button
         svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
         | {{ $store.getters['about/block9'].button.text }}
-    .about-collage-12.about-item
-      .about-collage-12__image
-      .second-title {{ $store.getters['about/block10'].title }}
-      .about-content(v-html="$store.getters['about/block10'].desc") {{ $store.getters['about/block10'].desc }}
-      router-link(
-        v-if="$store.getters['about/block10'].button.text"
-        :to="$store.getters['about/block10'].button.link"
-        exact
-      ).event-button
-        svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
-        | {{ $store.getters['about/block10'].button.text }}
-    .about-collage-11.about-item
-      .about-collage-11__image
+    .about-collage-10.about-item
+      .about-collage-10__image
       .second-title {{ $store.getters['about/block11'].title }}
-      .about-content(v-html="$store.getters['about/block11'].desc") {{ $store.getters['about/block11'].desc }}
+      .about-content(v-html="$store.getters['about/block11'].desc") {{ $store.getters['about/block10'].desc }}
       router-link(
         v-if="$store.getters['about/block11'].button.text"
         :to="$store.getters['about/block11'].button.link"
@@ -114,16 +104,18 @@
       ).event-button
         svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
         | {{ $store.getters['about/block11'].button.text }}
-    .about-collage-10.about-item
-      .about-collage-10__image
+    .about-collage-11.about-item
+      .about-collage-11__image
       .second-title {{ $store.getters['about/block12'].title }}
-      .about-content(v-html="$store.getters['about/block12'].desc") {{ $store.getters['about/block12'].desc }}
+      .about-content(v-html="$store.getters['about/block12'].desc") {{ $store.getters['about/block11'].desc }}
       router-link(
+        v-if="$store.getters['about/block12'].button.text"
         :to="$store.getters['about/block12'].button.link"
         exact
       ).event-button
         svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
         | {{ $store.getters['about/block12'].button.text }}
+
   modal-right-to-left(title="Закрытая территория" ref="modalClosedTerritory")
     img(alt src="../assets/images/modal-closed-territory.jpg")
     .custom-modal-text
@@ -263,104 +255,106 @@ export default {
   height 290px
   background no-repeat center/cover
 .about-full-bg-1
-  background-image url('../assets/images/about-full-bg-1.jpg')
+  background-image url('../assets/images/about-full-bg-1.png')
 .about-full-bg-2
   background-image url('../assets/images/about-full-bg-2.jpg')
 .about-collage-1
   padding 0 20px
   position relative
   &__image
-    height 300px
-    margin 0 -20px
-    background url('../assets/images/about-collage-1.png') no-repeat center top/374px 715px
+    height 275px
+    height 275px
+    margin-bottom  24px
+    background url('../assets/images/about-collage-1.png') no-repeat center top/contain
 .about-collage-2
   &__image
-    size 280px
+    size 275px
     z-index -1
     absolute left 50% top 0
     transform translateX(-50%)
     border-radius: 50%
-    background url('../assets/images/about-collage-2.jpg') no-repeat center top/375px 629px
+    background url('../assets/images/about-collage-2.png') no-repeat center top/contain
     background-size: cover;
 .about-collage-3
   &__image
-    size 280px
+    size 275px
     z-index -1
     absolute left 50% top 0
     transform translateX(-50%)
     border-radius: 50%
-    background url('../assets/images/about-collage-3.jpg') no-repeat center top/376px 482px
+    background url('../assets/images/about-collage-3.png') no-repeat center top/contain
     background-size: cover;
 .about-collage-4
   &__image
-    size 280px
+    size 275px
     border-radius: 50%
     z-index -1
     absolute left 50% top 10px
     transform: translateX(-50%)
-    background url('../assets/images/about-collage-4.jpg') no-repeat center/cover
+    background url('../assets/images/about-collage-4.png') no-repeat center/contain
 .about-collage-5
   margin-top 30px
   &__image
-    size 100%
+    size 275px
     z-index -1
-    absolute left 0 top 0
-    background url('../assets/images/about-collage-5.png') no-repeat center top/374px 482px
+    absolute left 50% top 10px
+    transform: translateX(-50%)
+    background url('../assets/images/about-collage-5.png') no-repeat center top/contain
 .about-collage-6
   &__image
-    size 280px
+    size 275px
     z-index -1
     absolute left 50% top 0
     transform translateX(-50%)
     border-radius: 50%
-    background url('../assets/images/about-collage-6.png') no-repeat center top/374px 294px
+    background url('../assets/images/about-collage-6.png') no-repeat center top/contain
     background-size: cover;
 .about-collage-7
   &__image
-    size 280px
+    size 275px
     z-index -1
     absolute left 50% top 0
     transform translateX(-50%)
     border-radius: 50%
-    background url('../assets/images/about-collage-7-1.png') no-repeat center top/374px 620px
+    background url('../assets/images/about-collage-7.png') no-repeat center top/contain
     background-size: cover;
 .about-collage-8
   padding-top 330px
   &__image
-    size 100%
+    size 275px
     z-index -1
-    absolute left 0 top 0
-    background url('../assets/images/about-collage-8.png') no-repeat center top -105px/375px 610px
+    absolute left 50% top 0
+    transform translateX(-50%)
+    background url('../assets/images/about-collage-8.png') no-repeat center top/contain
 .about-collage-9
   &__image
-    size 100%
+    size 275px
     z-index -1
-    absolute left 0 top 0
-    background url('../assets/images/about-collage-9.png') no-repeat center top/375px 294px
+    absolute left 50% top 0
+    transform translateX(-50%)
+    background url('../assets/images/about-collage-9.png') no-repeat center top/contain
 .about-collage-10
   padding-top 320px
   &__image
-    size 280px
+    size 275px
     z-index -1
     absolute left 0 top 0
     absolute left 50% top 0
     transform translateX(-50%)
     border-radius: 50%
-    background url('../assets/images/about-collage-10.jpg') no-repeat
-    background-position-x: -70px
-    background-position-y: 0px
-    background-size: cover;
+    background url('../assets/images/about-collage-10.png') no-repeat center top/contain
 .about-collage-12
   padding-top 310px
   &__image
-    size 100%
+    size 275px
     z-index -1
     absolute left 0 top 0
     background url('../assets/images/about-collage-12.png') no-repeat center top/294px
 .about-collage-11
   &__image
-    size 100%
+    size 275px
     z-index -1
-    absolute left 0 top 0
-    background url('../assets/images/about-collage-11.png') no-repeat center top/375px 582px
+    absolute left 50% top 0
+    transform translateX(-50%)
+    background url('../assets/images/about-collage-11.png') no-repeat center top/contain
 </style>
