@@ -1,10 +1,14 @@
 <template lang="pug"> #app
   //- .width-height-view(v-if="whv") {{ whv }}
+
+
+  Cookies(@openPol="openPrivatePolice")
   .first-boot(v-if="firstBoot")
   .header: top-buttons(v-if="topButtonsShow")
+
   .main: router-view
-  .back.icon-border(v-if="!emptyHistory" @click="$router.back()" style="z-index: 100")
-    svg: use(xlink:href="/static/sprite.svg#arrow-back")
+  //- .back.icon-border(v-if="!emptyHistory" @click="$router.back()" style="z-index: 100")
+  //-   svg: use(xlink:href="/static/sprite.svg#arrow-back")
   .bottom-right-panel
     button(
       v-if="!menuShow && !phoneHidden"
@@ -29,9 +33,12 @@
         svg: use(xlink:href="/static/sprite.svg#phone")
   Footer(v-if="footerShow")
   notifications
+
+
   ModalCallback(ref="modal" theme="Заказать обратный звонок")
+
   transition(name="fade-025"): .hidden-menu(v-if="menuShow")
-    .top-right-panel
+    .top-right-panel()
       .icon-bg.icon-bg--close(@click="toggleMenu"): svg: use(xlink:href="/static/sprite.svg#close")
       a.phone.comagic_phone(
         :href="`tel://${phone.href}`"
@@ -62,7 +69,7 @@
       svg.ellipse.ellipse-4(xmlns="http://www.w3.org/2000/svg" width="659" height="659" viewBox="0 0 659 659")
         clipPath#ix7qa: path(fill="#fff" d="M659 329.5C659 511.478 511.478 659 329.5 659S0 511.478 0 329.5 147.522 0 329.5 0 659 147.522 659 329.5z")
         path(fill="none" stroke-miterlimit="20" stroke-width="4" d="M659 329.5C659 511.478 511.478 659 329.5 659S0 511.478 0 329.5 147.522 0 329.5 0 659 147.522 659 329.5z" clip-path="url(#ix7qa)")
-    .container.h-100: .hidden-menu__wrapper
+    .container.h-100.menu: .hidden-menu__wrapper
       .first-menu: router-link(v-for="item in menu" :key="item.to" :to="item.to" exact) {{ item.title }}
       .second-menu: router-link(v-for="item in subMenu" :key="item.to" :to="item.to" exact) {{ item.title }}
 </template>
@@ -74,8 +81,11 @@ import { mapGetters, mapActions } from 'vuex'
 import TopButtons from './components/TopButtons'
 import ModalCallback from './components/ModalCallback.vue'
 
+
+import Cookies from '@/components/cookies'
+
 export default {
-  components: { Footer, TopButtons, ModalCallback },
+  components: { Footer, TopButtons, ModalCallback,Cookies },
   data: () => ({
     firstBoot: true,
     emptyHistory: true,
@@ -92,7 +102,8 @@ export default {
       phoneHidden: 'variables/phoneHidden',
       phoneBlackMode: 'variables/phoneBlackMode',
       topButtonsShow: 'variables/topButtonsShow',
-      phoneTextVisible: 'variables/phoneTextVisible'
+      phoneTextVisible: 'variables/phoneTextVisible',
+      privatePolice: 'agreePrivatePolice/privatePolice'
     })
   },
   mounted () {
@@ -113,7 +124,9 @@ export default {
       setTimeout(() => loaderHide(), 200)
     }
   },
-  methods: mapActions({toggleMenu: 'variables/toggleMenu'})
+  methods: { ...mapActions({ toggleMenu: 'variables/toggleMenu' }),openPrivatePolice () {
+      $.fancybox.open(`<div class="container">${this.privatePolice}</div>`)
+    } }
 }
 </script>
 <style>
@@ -123,4 +136,7 @@ export default {
 </style>
 <style scoped lang="stylus">
 @import 'assets/styles.styl'
+.menu
+  @media(min-width 1530px)
+    padding 0 162px
 </style>

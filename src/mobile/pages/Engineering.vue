@@ -1,10 +1,28 @@
 <template lang="pug"> .engineering
   .top-bg
-  title-circle Инженерия
-  .item(v-for="(item,i) in items")
-    .item__image(:style="{backgroundImage:`url('/static/engineering/engineering-circle-${i + 1}.png')`}")
-    .item__title(v-html="item.title")
-    .item__desc(v-html="item.content")
+  div
+    title-circle Инженерия
+    .desc «Зорге.Премьер» — это проверенные временем производители и современные инженерные системы, которые обеспечивают высочайший уровень безопасности и комфорта для каждого жильца.
+  //- .item(v-for="(item,i) in items")
+  //-   .item__image(:style="{backgroundImage:`url('/static/engineering/engineering-circle-${i + 1}.png')`}")
+  //-   .item__title(v-html="item.title")
+  //-   .item__desc(v-html="item.content")
+  .item()
+    .item__image(:style="{backgroundImage:`url('/static/engineering/engineering-picture-9.png')`}")
+    .item__title(v-html="items[0].title")
+    .item__desc(v-html="items[0].content")
+  .item()
+    .item__image(:style="{backgroundImage:`url('/static/engineering/engineering-picture-8.png')`}")
+    .item__title(v-html="items[1].title")
+    .item__desc(v-html="items[1].content")
+  .item()
+    .item__image(:style="{backgroundImage:`url('/static/engineering/engineering-picture-1.png')`}")
+    .item__title(v-html="items[2].title")
+    .item__desc(v-html="items[2].content")
+  .item()
+    .item__image(:style="{backgroundImage:`url('/static/engineering/engineering-picture-10.png')`}")
+    .item__title(v-html="items[3].title")
+    .item__desc(v-html="items[3].content")
 </template>
 
 <script>
@@ -48,4 +66,13 @@ export default {
     font-size 12px
     line-height 1.2
     text-align center
+
+.desc
+  font-family 'Heading Pro Wide'
+  color white
+  padding 0 16px
+  text-align center
+.list
+  display none
+  padding-left 20px
 </style>

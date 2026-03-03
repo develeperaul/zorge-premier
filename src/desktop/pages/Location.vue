@@ -1,5 +1,5 @@
-<template lang="pug"> ScrollPage(backgroundImage="/static/gallery/architecture/render-8.jpg")
-  .container.mb-5: .row
+<template lang="pug"> ScrollPage(backgroundImage="/static/gallery/architecture/render-13.jpeg")
+  //- .container.mb-5: .row
     .col-md-6: .title-list Основные преимущества комфорта для современного горожанина
     .col-md-6: ul.list
       li(v-for="item in list") {{ item }}
@@ -34,8 +34,8 @@
         :balloon-template="marker.balloon"
       )
 
-  .container.mt-5
-    .row.mb-5.align-items-center
+  .container
+    //- .row.mb-5.align-items-center
       .col-md-7
         .long-title Транспортная доступность
         p Расположение комплекса идеально: тихий центр, рядом большой лесной массив, в шаговой доступности крупные городские магистрали. Добраться до работы или выехать из города не составит труда.
@@ -239,11 +239,11 @@ export default {
       margin-top 20px
 .map
   z-index 1
-  size 100% 880px
+  size 100% 884px
   max-height 100vh
   position relative
   &__tabs
-    z-index 10
+    z-index 11
     user-select none
     absolute top 45px
   &__tab
@@ -316,7 +316,7 @@ export default {
 .location-full-bg
   size 100% 625px
   position relative
-  background url('/static/gallery/architecture/render-5.jpg') no-repeat center bottom/cover
+  background url('/static/gallery/architecture/render-14.jpeg') no-repeat center bottom/cover
 
 .location-picture
   +below(1345px)

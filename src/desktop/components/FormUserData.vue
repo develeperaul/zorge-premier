@@ -11,6 +11,7 @@
           v-model="form.name"
           required
         )
+
       .col-md-12.form-group
         label.custom-form__label(for="cellphone") Номер телефона
         .position-relative: input.form-control.custom-form__control(
@@ -21,10 +22,28 @@
           minlength="18"
           id="cellphone"
         )
+      .col-md-12.form-group
+          label.custom-form__label(for="summ") 3+4 = ?
+          .position-relative: input.form-control.custom-form__control(
+            type="number"
+            placeholder="3+4"
+            v-model="form.summ"
+            id="summ"
+          )
     .row(:style="{ opacity: success ? 0 : 1}")
       .col-md-12(style="margin-top: 14px")
         proposed-page(@click="1" type="submit" style="margin: 0 auto; max-width: 300px; width: 100%") Забронировать
-      .col-md-12.d-flex.align-items-center(style="margin-top: 40px; margin-left: auto; margin-right: auto; max-width: 300px")
+      .col-md-6.d-flex.align-items-center
+          input.custom-form__checkbox(
+            type="checkbox"
+            id="agree"
+            v-model="form.agree"
+          )
+          label.custom-form__agree(for="agree")
+            |  Я согласен с&nbsp;
+            a(href="/static/sogl.pdf" target="_blank") условиями обработки моих персональных данных
+
+      //- .col-md-12.d-flex.align-items-center(style="margin-top: 40px; margin-left: auto; margin-right: auto; max-width: 300px")
         .custom-form__agree Я согласен с&nbsp;
           a(href="javascript:void(0)" @click="openAgree") условиями обработки моих персональных данных
 </template>
@@ -49,7 +68,9 @@ export default {
       form: {
         name: '',
         phone: '',
-        email: ''
+        email: '',
+        summ: '',
+        sogl: false
       },
       success: false
     }
@@ -63,43 +84,48 @@ export default {
     },
     async submit() {
       try {
-        if(this.form.phone.length !== 18) return alert('Номер телефона должен быть заполнен полностью!')
-        this.loaderShow();
-        await book({
-          client_id: '1',
-          client_secret: 'SEcVU6PJlq68ZS4GzPPOltJprNazjw1Xl4sJ5Pk0',
+        if (this.form.phone.length !== 18) return alert('Номер телефона должен быть заполнен полностью!')
+        if (this.form.summ == 7) {
 
-          email_ids: [1],
-          theme: this.theme,
+          this.loaderShow();
+          await book({
+            client_id: '1',
+            client_secret: 'SEcVU6PJlq68ZS4GzPPOltJprNazjw1Xl4sJ5Pk0',
 
-          crm_lead: 0,
+            email_ids: [1],
+            theme: this.theme,
 
-          user_name: this.form.name,
-          user_phone: this.form.phone,
+            crm_lead: 0,
 
-          _dictionary: {
-            user_name: 'Имя пользователя',
-            user_email: 'Электронная почта',
-            user_phone2: 'Мобильный'
-          }
-        });
+            user_name: this.form.name,
+            user_phone: this.form.phone,
 
-        ym(91348334,'reachGoal','zayavka');
+            _dictionary: {
+              user_name: 'Имя пользователя',
+              user_email: 'Электронная почта',
+              user_phone: 'Мобильный',
+              sogl: 'Согласие на обработку'
+            },
+            sogl:this.form.sogl ? 1 : 0
+          });
 
-        Comagic.addOfflineRequest({
-          name: this.form.name,
-          phone: this.form.phone,
-          message: this.theme,
-        });
+          ym(91348334,'reachGoal','zayavka');
 
-        this.$VKGoal('lead');
+          Comagic.addOfflineRequest({
+            name: this.form.name,
+            phone: this.form.phone,
+            message: this.theme,
+          });
 
-        this.loaderHide();
-        setTimeout(() => {
-          this.form.name = '';
-          this.form.phone = '';
-          this.success = true;
-        }, 450)
+          this.$VKGoal('lead');
+
+          this.loaderHide();
+          setTimeout(() => {
+            this.form.name = '';
+            this.form.phone = '';
+            this.success = true;
+          }, 450)
+        }
       } catch(e) {
         this.loaderHide();
         setTimeout(() => {

@@ -1,8 +1,13 @@
 <template lang="pug"> .scroll-page: smooth-scrollbar(ref="scrollbar")
   .first-section(:style="style")
+    div(v-if="isBtn" class="first-section__btn" @click="()=>$emit('open')")
+      img(src="/static/popup-icon.png")
     Logo
     .container(v-if="pageTitle")
-      h1 {{ pageTitle }}
+      div
+        div(:class="{'first-section__title':isBtn}")
+          h1 {{ pageTitle }}
+          p(v-if="pageSubTitle" class="subtitle") {{ pageSubTitle }}
       slot(name="first")
     next-section(@click="nextBlock")
   .main-section
@@ -16,7 +21,7 @@ import Footer from './Footer'
 import NextSection from './NextSection'
 import {mapGetters} from 'vuex'
 export default {
-  props: [ 'title', 'backgroundImage' ],
+  props: [ 'title', 'backgroundImage', 'isBtn' ],
   components: { Logo, Footer, NextSection },
   computed: {
     ...mapGetters({scrollPageOffsetY: 'variables/scrollPageOffsetY'}),
@@ -25,6 +30,9 @@ export default {
     },
     pageTitle () {
       return this.title || this.$route.meta.title
+    },
+    pageSubTitle () {
+      return  this.$route.meta.subtitle
     },
     style () {
       return this.backgroundImage
@@ -93,4 +101,38 @@ export default {
   overflow hidden
   padding 100px 0 0
   background-color #1F252F
+.subtitle
+  font-weight 600
+  font-size 20px
+  line-height 100%
+  letter-spacing 0.22em
+  text-transform uppercase
+  color white
+  margin-top 16px
+
+</style>
+<style>
+.first-section__title {
+  transform: translate(0px, -100px);
+  display: inline-block;
+  padding-left: 70px;
+}
+@media (min-width: 1800px) {
+  .first-section__title {
+    padding-left: 70;
+  }
+}
+
+.first-section__title  {
+
+}
+.first-section__btn {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  left: 62px;
+  bottom: 80px;
+  border-radius: 9999px;
+
+}
 </style>

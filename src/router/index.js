@@ -24,13 +24,19 @@ const router = new Router({
       path: '/location',
       name: 'Расположение',
       component: pages.Location,
-      meta: { title: 'Расположение' }
+      meta: { title: 'Расположение', subtitle: 'ул. Рихарда Зорге, 73/1' }
     },
     {
       path: '/building',
       name: 'Ход строительства',
       component: pages.Building,
       meta: { title: 'Ход строительства' }
+    },
+    {
+      path: '/videos',
+      name: 'Видео о проекте',
+      component: pages.Videos,
+      meta: { title: 'Видео о проекте' }
     },
     {
       path: '/gallery',
@@ -114,6 +120,12 @@ const router = new Router({
       path: '/developer',
       name: 'О застройщике',
       component: pages.Developer,
+      meta: { title: 'О застройщике' }
+    },
+    {
+      path: '/docs',
+      name: 'Документы',
+      component: pages.Docs,
       meta: { title: 'О застройщике' }
     }
   ]

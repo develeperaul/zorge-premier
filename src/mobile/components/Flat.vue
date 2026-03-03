@@ -36,7 +36,23 @@
       .flat-attr
         .flat-attr__value {{ flat.price.split('.')[0].match(/.{1,3}(?=(.{3})*$)/g).join(' ') }}
         .flat-attr__name руб, стоимость
-    .flat-image: .flat-image__wrapper: img(:src="storey.image_maps[0] && storey.image_maps[0].path" style="max-width: 100%")
+    //- .flat-image: .flat-image__wrapper: img(:src="storey.image_maps[0] && storey.image_maps[0].path" style="max-width: 100%")
+    .flat-image
+      .flat-image__wrapper
+        .position-relative.h-100
+            svg.storey__svg( xmlns="http://www.w3.org/2000/svg" :viewBox="viewBox" version="1.1" width="100%" height="100%")
+              image(:xlink:href="storey.image_maps[0].path" width="100%")
+              g
+                template(v-for="(flat, i) in storey.image_maps[0].flats")
+
+                  path.storey__path(
+                        v-if="flat.status !== 'sold'"
+                        :d="flat.polygon"
+                        :fill-opacity=" 0.5 "
+                         :class="['svg-flat', flat.status]"
+                         @click="$emit('updateFlat', flat)"
+                      )
+        //- img(:src="storey.image_maps[0] && storey.image_maps[0].path" style="max-width: 100%")
     .flat-storey-wind-rose
       .flat-storey
         img(v-if="flat.images" alt :src="flat.images[0]" style="max-width: 100%")
@@ -49,11 +65,11 @@
           .flat-pdf__text Скачать планировку
     .flat-circle-links
       router-link.flat-circle-link.flat-circle-link--1(to="/gallery/interiors") Интерьер
-      a(v-if="flat && flat.comments" href='#' @click="$refs.walk3d.open()").flat-circle-link.flat-circle-link--2 3D-прогулка
-    back-to(to="/parking" icon="parking" style="margin-bottom: 20px") Выбрать паркинг
-    div(style="padding-left: 51px;" v-if="flat.status === 'free'")
+      //- a(v-if="flat && flat.comments" href='#' @click="$refs.walk3d.open()").flat-circle-link.flat-circle-link--2 3D-прогулка
+    //- back-to(to="/parking" icon="parking" style="margin-bottom: 20px") Выбрать паркинг
+    div(style="" v-if="flat.status === 'free'")
       back-to(icon="arrow-horizontal-small" removeBack @click="$refs.modal.open()") Забронировать
-    div(style="padding-left: 51px;" v-if="flat.status !== 'free'" )
+    div(style="" v-if="flat.status !== 'free'" )
       back-to(to="/filter" icon="filter" removeBack) Подбор по параметрам
     Modal(v-if="flat && flat.comments" ref="walk3d" className="custom-form" :options="{touch: false, baseClass: 'custom-modal'}")
       iframe(:src='flat.comments' frameborder='0' width='100%' height='100%')
@@ -80,10 +96,25 @@
               minlength="18"
               id="cellphone"
             )
+          .col-md-12.form-group
+            label.custom-form__label(for="summ") 3+4 = ?
+            .position-relative: input.form-control.custom-form__control(
+              type="number"
+              placeholder="3+4"
+              v-model="form.summ"
+              id="summ"
+            )
         .row
           .col-md-6.d-flex.align-items-center
-            .custom-form__agree Я согласен с&nbsp;
-              a(href="javascript:void(0)" @click="openAgree") условиями обработки моих персональных данных
+            .col-md-6.d-flex.align-items-center
+              input.custom-form__checkbox(
+                type="checkbox"
+                id="agree"
+                v-model="form.sogl"
+              )
+              label.custom-form__agree(for="agree")
+                |  Я согласен с&nbsp;
+                a(href="/static/sogl.pdf" target="_blank") условиями обработки моих персональных данных
           .col-md-6
             button.btn.custom-form__btn(type="submit") Отправить
 </template>
@@ -97,14 +128,16 @@ import { show as showStorey } from '@/api/storeys';
 import { pdf } from '@/api/flats';
 import Modal from '@/components/Modal'
 import { mask } from 'vue-the-mask'
+import { show as showFlat } from '@/api/flats';
 const md5 = require('md5')
 export default {
   props: {
     flatId: {
       required: true,
       type: Number
-    }
+    },
   },
+
   directives: { mask },
   components: {BackTo, Modal},
   data: () => ({
@@ -135,8 +168,10 @@ export default {
     form: {
       name: '',
       phone: '',
-      email: ''
-    }
+      email: '',
+      summ: ''
+    },
+    currentStorey: null,
   }),
   computed: {
     ...mapGetters({
@@ -146,6 +181,14 @@ export default {
     compassStyles() {
       if(!this.flat) return '';
       return `transform: rotate(45deg)`
+    },
+    viewBox() {
+
+
+      if(this.$route.query.houseId == 3 && this.id === 26) return '0 0 1599 2138';
+      else if(this.$route.query.houseId == 3) return '0 0 574 768';
+      else if(this.$route.query.houseId == 1 || this.$route.query.houseId == 2) return '0 0 1500 1206';
+      else return '0 0 2560 1440';
     }
   },
   async created() {
@@ -286,42 +329,46 @@ export default {
     }),
     async submit() {
       try {
-        if(this.form.phone.length !== 18) return alert('Номер телефона должен быть заполнен полностью!')
-        this.loaderShow();
-        const theme = `Забронировать квартиру №${ this.flat.number }`;
-        await book({
-          client_id: '1',
-          client_secret: 'SEcVU6PJlq68ZS4GzPPOltJprNazjw1Xl4sJ5Pk0',
+        if (this.form.phone.length !== 18) return alert('Номер телефона должен быть заполнен полностью!')
+        if (this.form.summ == 7) {
+          this.loaderShow();
+          const theme = `Забронировать квартиру №${ this.flat.number }`;
+          await book({
+            client_id: '1',
+            client_secret: 'SEcVU6PJlq68ZS4GzPPOltJprNazjw1Xl4sJ5Pk0',
 
-          email_ids: [1],
-          theme,
+            email_ids: [1],
+            theme,
 
-          crm_lead: 0,
+            crm_lead: 0,
 
-          user_name: this.form.name,
-          user_phone: this.form.phone,
+            user_name: this.form.name,
+            user_phone: this.form.phone,
 
-          _dictionary: {
-            user_name: 'Имя пользователя',
-            user_email: 'Электронная почта',
-            user_phone2: 'Мобильный'
-          }
-        });
+            _dictionary: {
+              user_name: 'Имя пользователя',
+              user_email: 'Электронная почта',
+              user_phone: 'Мобильный',
+              sogl: 'Согласие на обработку'
+            },
+            sogl:this.form.sogl ? 1 : 0
+          });
 
-        ym(91348334,'reachGoal','zayavka');
+          ym(91348334,'reachGoal','zayavka');
 
-        Comagic.addOfflineRequest({
-          name: this.form.name,
-          phone: this.form.phone,
-          message: theme,
-        });
+          Comagic.addOfflineRequest({
+            name: this.form.name,
+            phone: this.form.phone,
+            message: theme,
+          });
 
-        this.$VKGoal('lead');
+          this.$VKGoal('lead');
 
-        this.loaderHide();
-        setTimeout(() => {
-          alert('Ваша заявка успешно отправлена')
-        }, 450)
+          this.loaderHide();
+          setTimeout(() => {
+            alert('Ваша заявка успешно отправлена')
+          }, 450)
+        }
       } catch(e) {
         this.loaderHide();
         setTimeout(() => {
@@ -333,6 +380,9 @@ export default {
       const { data: { data } } = await show(this.flatId);
       this.flat = data;
     },
+    showFlat (_flatId) {
+      this.flatId = _flatId;
+    },
     async getStorey() {
       const { data: { data } } = await showStorey(this.flat.storey);
       this.storey = data;
@@ -341,10 +391,10 @@ export default {
      const path = await pdf({
         client_id: '1',
         client_secret: 'SEcVU6PJlq68ZS4GzPPOltJprNazjw1Xl4sJ5Pk0',
-        header_logo_image: 'http://yes-idea.ru/jsi.png',
+        header_logo_image: 'https://zorge-premier.ru/logo.png',
         header_site: 'https://js-invest.ru/',
         header_tel_prefix: '+7 (347)',
-        header_tel: '289-90-05',
+        header_tel: '266-87-05',
         pdf_info_rooms_count: this.flat.rooms_number,
         pdf_info_kv_num: this.flat.number,
         pdf_info_kv_etazh: this.flat.storey_number,

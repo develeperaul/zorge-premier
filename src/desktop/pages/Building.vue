@@ -1,4 +1,4 @@
-<template lang="pug"> .building: ScrollPage(backgroundImage="/static/gallery/architecture/progress.jpg")
+<template lang="pug"> .building: ScrollPage(backgroundImage="/static/gallery/architecture/progress-2.jpg")
   .container
     .photos(v-if="building")
       .photos-years
@@ -18,17 +18,17 @@
           @click="openImage(i)"
           :style="{backgroundImage:`url(${image})`}"
         )
-    .video(v-if="streaming")
-      .title-video Он-лайн трансляция
-      .video-frame: iframe(
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        allowfullscreen="allowfullscreen"
-        webkitallowfullscreen="true"
-        mozallowfullscreen="true"
-        :src="streaming"
-      )
+    //- .video(v-if="streaming")
+    //-   .title-video Онлайн трансляция
+    //-   .video-frame: iframe(
+    //-     frameborder="0"
+    //-     marginheight="0"
+    //-     marginwidth="0"
+    //-     allowfullscreen="allowfullscreen"
+    //-     webkitallowfullscreen="true"
+    //-     mozallowfullscreen="true"
+    //-     :src="streaming"
+    //-   )
 </template>
 
 <script>

@@ -29,6 +29,7 @@ export default {
   mounted () {
     const self = this
     this.menu = new MobileSwipeMenu(this.$refs.menu, {
+
       width: innerWidth,
       enableBodyHook: true,
       events: {

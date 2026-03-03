@@ -1,5 +1,5 @@
 <template lang="pug"> .apartment-concepts
-  ScrollPage(ref="scrollbar" :backgroundImage="require('../assets/images/apartment-concepts.jpg')")
+  ScrollPage(ref="scrollbar" :backgroundImage="require('./../assets/images/apartment-concepts-bg-full-3.png')")
     .container
       .row.mb-5.align-items-center.apartment-concepts-content.apartment-concepts-content-1
         div.apartment-concepts-content__text

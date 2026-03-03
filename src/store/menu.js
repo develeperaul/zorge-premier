@@ -19,6 +19,10 @@ export default {
         title: 'Галерея',
         to: '/gallery'
       },
+      {
+        title: 'Видео о проекте',
+        to: '/videos'
+      },
       /*{
         title: '3D прогулка',
         to: '/3d'
@@ -41,10 +45,10 @@ export default {
         title: 'Застройщик',
         to: '/developer'
       },
-      /*{
+      {
         title: 'Документы',
         to: '/docs'
-      }*/
+      }
     ],
     mobileMenuContext: null
   },

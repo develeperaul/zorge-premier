@@ -29,7 +29,7 @@ export default {
     houses: {
       1: '1А',
       2: '1Б',
-      3: '1Г',
+      8: '1Д',
     },
     fields: fields(),
     result: [],

@@ -4,6 +4,7 @@ import Home from '../desktop/pages/Home'
 import Location from '../desktop/pages/Location'
 import Building from '../desktop/pages/Building'
 import Gallery from '../desktop/pages/Gallery'
+import Videos from '../desktop/pages/Videos'
 import Filter from '../desktop/pages/Filter'
 import Select from '../desktop/pages/Select'
 import Storey from '../desktop/pages/Storey'
@@ -14,6 +15,7 @@ import Events from '../desktop/pages/Events'
 import Event from '../desktop/pages/Event'
 import Contacts from '../desktop/pages/Contacts'
 import Developer from '../desktop/pages/Developer'
+import Docs from '../desktop/pages/Docs'
 
 import MobileHome from '../mobile/pages/Home'
 import MobileGallery from '../mobile/pages/Gallery'
@@ -29,6 +31,8 @@ import MobileEvents from '../mobile/pages/Events'
 import MobileEvent from '../mobile/pages/Event'
 import MobileContactsEvent from '../mobile/pages/Contacts'
 import MobileDeveloper from '../mobile/pages/Developer'
+import MobileDocs from '../mobile/pages/Docs'
+import MobileVideos from '../mobile/pages/Videos'
 
 const pages = () => {
   if ((new MobileDetect(window.navigator.userAgent)).mobile()) {
@@ -46,7 +50,9 @@ const pages = () => {
       'Events': MobileEvents,
       'Event': MobileEvent,
       'Contacts': MobileContactsEvent,
-      'Developer': MobileDeveloper
+      'Developer': MobileDeveloper,
+      'Docs': MobileDocs,
+      'Videos':MobileVideos
     }
   } else {
     return {
@@ -63,7 +69,10 @@ const pages = () => {
       Events,
       Event,
       Contacts,
-      Developer
+      Developer,
+      Docs,
+      Videos
+
     }
   }
 }

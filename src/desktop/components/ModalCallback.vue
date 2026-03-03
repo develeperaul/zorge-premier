@@ -22,10 +22,25 @@
             minlength="18"
             id="cellphone"
           )
+        .col-md-12.form-group
+          label.custom-form__label(for="summ") 3+4 = ?
+          .position-relative: input.form-control.custom-form__control(
+            type="number"
+            placeholder="3+4"
+            v-model="form.summ"
+            id="summ"
+          )
+
       .row(:style="{ opacity: success ? 0 : 1}")
         .col-md-6.d-flex.align-items-center
-          .custom-form__agree Я согласен с&nbsp;
-            a(href="javascript:void(0)" @click="openAgree") условиями обработки моих персональных данных
+          input.custom-form__checkbox(
+            type="checkbox"
+            id="agree"
+            v-model="form.sogl"
+          )
+          label.custom-form__agree(for="agree")
+            |  Я согласен с&nbsp;
+            a(href="/static/sogl.pdf" target="_blank") условиями обработки моих персональных данных
         .col-md-6
           button.btn.custom-form__btn(type="submit") Отправить
 </template>
@@ -50,7 +65,9 @@ export default {
       form: {
         name: '',
         phone: '',
-        email: ''
+        email: '',
+        summ: '',
+        sogl: false
       },
       success: false
     }
@@ -64,48 +81,57 @@ export default {
     },
     async submit() {
       try {
+        // if (!this.form.agree) return alert('Необходимо согласиться с условиями!');
         if(this.form.phone.length !== 18) return alert('Номер телефона должен быть заполнен полностью!')
-        this.loaderShow();
+        if (this.form.summ == 7) {
 
-        await book({
-          client_id: '1',
-          client_secret: 'SEcVU6PJlq68ZS4GzPPOltJprNazjw1Xl4sJ5Pk0',
+          this.loaderShow();
 
-          email_ids: [1],
-          theme: this.theme,
+          await book({
+            client_id: '1',
+            client_secret: 'SEcVU6PJlq68ZS4GzPPOltJprNazjw1Xl4sJ5Pk0',
 
-          crm_lead: 0,
+            email_ids: [1],
+            theme: this.theme,
 
-          user_name: this.form.name,
-          user_phone: this.form.phone,
+            crm_lead: 0,
 
-          _dictionary: {
-            user_name: 'Имя пользователя',
-            user_email: 'Электронная почта',
-            user_phone2: 'Мобильный'
-          }
-        });
+            user_name: this.form.name,
+            user_phone: this.form.phone,
 
-        ym(91348334,'reachGoal','zayavka');
+            _dictionary: {
+              user_name: 'Имя пользователя',
+              user_email: 'Электронная почта',
+              user_phone: 'Мобильный',
+              sogl: 'Согласие на обработку'
+            },
+            sogl:this.form.sogl ? 1 : 0
+          });
 
-        Comagic.addOfflineRequest({
-          name: this.form.name,
-          phone: this.form.phone,
-          message: this.theme,
-        });
+          // ym(91348334,'reachGoal','zayavka');
+          this.loaderHide();
+          setTimeout(() => {
+            this.form.name = '';
+            this.form.phone = '';
+            this.success = true;
+          }, 450)
 
-        this.$VKGoal('lead');
+          Comagic.addOfflineRequest({
+            name: this.form.name,
+            phone: this.form.phone,
+            message: this.theme,
+          });
 
-        this.loaderHide();
-        setTimeout(() => {
-          this.form.name = '';
-          this.form.phone = '';
-          this.success = true;
-        }, 450)
+          this.$VKGoal('lead');
+        }
+
+
       } catch(e) {
         this.loaderHide();
+        console.log(e);
+
         setTimeout(() => {
-          alert('Произошла ошибка на сервере')
+          console.log('Произошла ошибка на сервере')
         }, 450);
       }
     },

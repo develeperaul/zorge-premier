@@ -1,10 +1,26 @@
 <template lang="pug"> .concepts
   .top-bg
   title-circle Концепции <br>квартир
-  .item(v-for="(item,i) in items")
-    .item__image(:style="{backgroundImage:`url('/static/concepts/concepts-circle-${i + 1}.png')`}")
-    .item__title(v-html="item.title")
-    .item__desc(v-html="item.content")
+  //- .item(v-for="(item,i) in items")
+  //-   .item__image(:style="{backgroundImage:`url('/static/concepts/concepts-circle-${i + 1}.png')`}")
+  //-   .item__title(v-html="item.title")
+  //-   .item__desc(v-html="item.content")
+  //- .item(v-for="(item,i) in items")
+  //-   .item__image(:style="{backgroundImage:`url('/static/concepts/concepts-circle-${i + 1}.png')`}")
+  //-   .item__title(v-html="item.title")
+  //-   .item__desc(v-html="item.content")
+  .item()
+    .item__image(:style="{backgroundImage:`url('/static/concepts/concepts-circle-7.png')`}")
+    .item__title(v-html="items[0].title")
+    .item__desc(v-html="items[0].content")
+  .item()
+    .item__image(:style="{backgroundImage:`url('/static/concepts/concepts-circle-10.png')`}")
+    .item__title(v-html="items[0].title")
+    .item__desc(v-html="items[0].content")
+  .item()
+    .item__image(:style="{backgroundImage:`url('/static/concepts/apartment-concepts-picture-16.png')`}")
+    .item__title(v-html="items[0].title")
+    .item__desc(v-html="items[0].content")
 </template>
 
 <script>
@@ -22,7 +38,7 @@ export default {
 <style scoped lang="stylus">
 .top-bg
   size 100% 328px
-  background url('../assets/images/concepts-bg.jpg') no-repeat center bottom/cover
+  background url('/static/concepts/apartment-concepts-bg-full-3.png') no-repeat center bottom/cover
 .item
   z-index 1
   padding 0 20px

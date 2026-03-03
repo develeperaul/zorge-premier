@@ -1,42 +1,49 @@
 <template lang="pug">
 .flat
-  ModalRightToLeft(
+  ModalRightToLeftOther(
     ref="rightModal"
     @afterClose="hideFlat"
     @close="$emit('close')"
     :title="`Квартира №${flat && flat.number}`"
+    :status="`${flat && flat.status}`"
   ): .flat__wrapper(v-if="flat && storey")
     .flat__body
       .flat__left
-        .flat__attr
-          .flat__attr__value {{ $store.state.filter.houses[flat.house] }}
-          .flat__attr__title литер
-        .flat__attr
-          .flat__attr__value {{ flat.rooms_number }}
-          .flat__attr__title комнаты
-        .flat__attr
-          .flat__attr__value {{ flat.storey_number }}
-          .flat__attr__title Этаж
-        .flat__attr
-          .flat__attr__value {{ flat.total_area }}
-          .flat__attr__title м2, площадь
-        .flat__attr(v-if="flat.status !== 'sold'")
-          div
-            div(:style="{'font-weight': '600', 'margin-top': '20px', 'font-size': '30px', 'text-transform': 'uppercase'}") {{ flat.price.split('.')[0].match(/.{1,3}(?=(.{3})*$)/g).join(' ') }}
-            div(:style="{ 'font-size': '14px', 'font-weight': 500, 'margin-top': '2px' }") руб, стоимость
-        .flat__attr
-          div(:style="{'font-weight': '600', 'margin-top': '20px', 'font-size': '30px', 'text-transform': 'uppercase'}")
-            span {{ statusText[flat.status] }}
-        wind-rose.flat__wind-rose(v-if="storey.image_maps")
-        .flat-storey(v-if="storey.image_maps[0]")
-          img(:width="storey.image_maps[0].width" :height="storey.image_maps[0].height" :src="storey.image_maps[0].path" style="max-width: 100%; height: auto")
-          .flat-storey__street ул. Зорге
+        .flat__left--top
+          .flat__attr
+            .flat__attr__value {{ $store.state.filter.houses[flat.house] }}
+            .flat__attr__title литер
+          .flat__attr
+
+            .flat__attr__value {{ flat.rooms_number }}
+            .flat__attr__title комнаты
+          .flat__attr
+            .flat__attr__value {{ flat.storey_number }}
+            .flat__attr__title Этаж
+          .flat__attr
+            .flat__attr__value {{ flat.total_area }}
+            .flat__attr__title м2, площадь
+          .flat__attr
+            .flat__attr__value {{ format((+flat.price).toFixed(0)) }}
+            .flat__attr__title руб, стоимость
+          //- .flat__attr(v-if="flat.status !== 'sold'")
+          //-   div
+          //-     div(:style="{'font-weight': '600', 'margin-top': '20px', 'font-size': '30px', 'text-transform': 'uppercase'}") {{ flat.price.split('.')[0].match(/.{1,3}(?=(.{3})*$)/g).join(' ') }}
+          //-     div(:style="{ 'font-size': '14px', 'font-weight': 500, 'margin-top': '2px' }") руб, стоимость
+          //- .flat__attr
+          //-   div(:style="{'font-weight': '600', 'margin-top': '20px', 'font-size': '30px', 'text-transform': 'uppercase'}")
+          //-     span {{ statusText[flat.status] }}
+        .flat__left--bottom
+          wind-rose.flat__wind-rose(v-if="storey.image_maps")
+          .flat-storey(v-if="storey.image_maps[0]")
+            img(:width="storey.image_maps[0].width" :height="storey.image_maps[0].height" :src="storey.image_maps[0].path" style="max-width: 100%; height: auto")
+            .flat-storey__street ул. Зорге
       .flat-image: .flat-image__wrapper: img(v-if="flat.images" alt :src="flat.images[0]")
       .flat-right
         a.flat-circle(href="#" @click="$refs.modalInt.open()")
           img(alt src="../assets/images/flat-circle-interior.png")
           .flat-circle__title Интерьеры
-        a.flat-circle(href="#" v-if='flat && flat.comments' @click="$refs.walk3d.open()")
+        //- a.flat-circle(href="#" v-if='flat && flat.comments' @click="$refs.walk3d.open()")
           img(alt src="../assets/images/flat-circle-walk3d.png")
           .flat-circle__title 3D-прогулка
     .flat__footer
@@ -52,19 +59,21 @@
     .modal-wrapper
       swiper(:options="swiperOpts")
         swiper-slide(
-          v-for="i in 16"
+          v-for="i in 23"
           :key="i"
         )
           img(
             style="width: 100%; height: 100%"
             alt
-            :src="`/static/158/${i}.jpg`"
+            :src="`/static/gallery/interiors/flat-${i}.jpg`"
           )
         .slider-button.slider-button--prev(slot="button-prev"): img(alt src="@/assets/svg/button-prev.svg")
         .slider-button.slider-button--next(slot="button-next"): img(alt src="@/assets/svg/button-prev.svg")
         .slider-pagination(slot="pagination")
+
   ModalRightToLeft(v-if="flat && flat.comments" title='3D-прогулка' ref="walk3d")
     iframe(:src='flat.comments'  width="100%" height="100%" frameborder='0')
+
   ModalRightToLeft(
     v-if="flat && flat.video_clip"
     ref="planer"
@@ -79,10 +88,11 @@ import { show as showStorey } from '@/api/storeys';
 import { pdf } from '@/api/flats';
 import WindRose from './WindRose'
 import ModalRightToLeft from './ModalRightToLeft'
+import ModalRightToLeftOther from './ModalRightToLeftOther'
 import ModalCallback from './ModalCallback'
 
 export default {
-  components: { WindRose, ModalRightToLeft, ModalCallback },
+  components: { WindRose, ModalRightToLeft, ModalCallback, ModalRightToLeftOther },
   props: {
     flatId: {
       required: true,
@@ -257,6 +267,43 @@ export default {
     },
   },
   methods: {
+    format(val){
+      const [num, num2 = ''] = val.toString().split('.')
+      const parts = num.match(/\d{1,3}(?=(\d{3})*$)/g)
+
+      return parts.join(" ")
+
+
+      // const preffixList = {
+      //   1: '',
+      //   2: 'млн.',
+      //   3: 'млрд.',
+      //   4: 'трлн.',
+      //   5: 'квлн.',
+      //   6: 'квинтл.',
+      // }
+      // const preffix = preffixList[parts.length - 1]
+      //   ? preffixList[parts.length - 1]
+      //   : ''
+
+      // if (val) {
+      //   const znak = String(num).replace(/[^-]/gi, '')
+      //   if (preffixList[parts.length - 1]) {
+      //     const after = [parts.slice(1, parts.length).join(''), num2]
+      //       .join('')
+      //       .slice(0, 2)
+
+      //     return after
+      //       ? znak +
+      //           [parts.slice(0, 1).join(' '), after.slice(0, 2)].join(',') +
+      //           ' ' +
+      //           preffix
+      //       : znak + parts.slice(0, 1).join(' ') + ' ' + preffix
+      //   } else
+      //     return znak + [parts.join(' '), num2].filter((val) => !!val).join(',')
+      // }
+      // return '0'
+    },
     ...mapActions({
       getFlat: 'flat/getFlat',
       getFlatMore: 'flat/getFlatMore',
@@ -272,20 +319,24 @@ export default {
       this.storey = data;
     },
     async uploadPlan() {
+      console.log(this.flat);
+      let newUrl = this.flat.images[0].replace('/flats//', '/flats/');
+      console.log(newUrl);
+
       const path = await pdf({
         client_id: '1',
         client_secret: 'SEcVU6PJlq68ZS4GzPPOltJprNazjw1Xl4sJ5Pk0',
-        header_logo_image: 'http://yes-idea.ru/jsi.png',
+        header_logo_image: 'https://zorge-premier.ru/logo.png',
         header_site: 'https://js-invest.ru/',
         header_tel_prefix: '+7 (347)',
-        header_tel: '289-90-05',
+        header_tel: '266-87-05',
         pdf_info_rooms_count: this.flat.rooms_number,
         pdf_info_kv_num: this.flat.number,
         pdf_info_kv_etazh: this.flat.storey_number,
         pdf_info_kompleks: this.flat.house_name,
         pdf_info_kv_sq: this.flat.total_area,
         pdf_info_price: this.flat.status === 'sold' ? 'Продана' : this.flat.price,
-        pdf_info_image: this.flat.images[0].replace('/flats/', '/flats_old/'),
+        pdf_info_image: newUrl,
       });
 
       let a = document.createElement("a");
@@ -330,6 +381,7 @@ export default {
 }
 </script>
 <style scoped lang="stylus">
+
 .flat-right
   padding-top 100px
   > a + a
@@ -412,10 +464,24 @@ export default {
     justify-content space-between
     +below(1440px)
       padding-bottom 50px
+    &--top
+      display grid
+      grid-template-columns minmax(110px,1fr) minmax(110px,1fr)
+      gap 40px 30px
+    &--top > *
+      justify-self center
+    &--top > *:last-child
+      grid-column: span 2;
+    &--bottom
+      display grid
+      width fit-content
+      gap 50px
   &__attr
     color #fff
     line-height 1
     text-align center
+    display grid
+    gap 8px
     &__value
       font-weight 700
       font-size rem(30px)
@@ -587,4 +653,5 @@ export default {
   absolute left 35px bottom 55px
   +below(1800px)
     bottom 85px
+
 </style>

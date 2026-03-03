@@ -42,6 +42,12 @@ export default {
       this.$nextTick(() => {
         $.fancybox.open($(this.$refs.modal), this.defaultOptions)
       })
+    },
+    close () {
+      this.formShow = true
+      this.$nextTick(() => {
+        $.fancybox.close($(this.$refs.modal), this.defaultOptions)
+      })
     }
   }
 }

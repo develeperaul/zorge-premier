@@ -77,6 +77,7 @@ h1
   line-height 1.4
   padding-right 15px
   padding-bottom 30px
+  z-index 11
 .developer-link
   display flex
   margin-top 45px
@@ -97,6 +98,7 @@ h1
     border-bottom 2px solid #F6AC6D
 .right-content
   height 100%
+  max-width 1270px
   display flex
   padding-bottom 68px
   absolute right 0 top 0
@@ -134,4 +136,7 @@ h1
       left 30px
       bottom 50px
       font-size 18px
+.container
+  @media(min-width 1530px)
+    padding 0 162px
 </style>

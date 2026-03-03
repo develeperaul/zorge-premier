@@ -15,5 +15,7 @@ export function pdf(params) {
 }
 
 export function book(data) {
+  console.log(data);
+
   return axios.post(`api/v2/feedback`, data);
 }

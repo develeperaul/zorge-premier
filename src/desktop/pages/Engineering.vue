@@ -1,7 +1,7 @@
 <template lang="pug"> .apartment-concepts
   ScrollPage(ref="scrollbar" :backgroundImage="require('../assets/images/engineering.jpg')")
     template(v-slot:first="")
-      .desc Zorge Premiere — это современные инженерные системы, которые обеспечивают высочайший уровень безопасности и комфорта для каждого жильца.
+      .desc «Зорге.Премьер» — это проверенные временем производители и современные инженерные системы, которые обеспечивают высочайший уровень безопасности и комфорта для каждого жильца.
     .container.engineering-container
       .engineering-content.engineering-content-1
         div: .engineering-picture-1.engineering-picture: .sizer
@@ -72,41 +72,48 @@ export default {
   +below(1340px)
     padding-left 60px
 .engineering-container
-  max-width: 1594px
   display grid
-  grid-template-columns repeat(4,1fr)
+  grid-template-columns repeat(2,1fr)
+  justify-items center
+  @media(min-width:1630px)
+    grid-template-columns repeat(4,1fr)
+    max-width: 1594px
   gap 33px
 
 
 
 .engineering-content-1
-  grid-column 1 / 2
+  @media(min-width:1630px)
+    grid-column 1 / 2
   &:before
     content ''
     size 1075px
     absolute right -175px top 195px
     background url('./../assets/images/about-picture-17.png') no-repeat center/cover
 .engineering-content-2
-  grid-column 3 / 4
+  @media(min-width:1630px)
+    grid-column 3 / 4
 
 
 .engineering-content-3
-  grid-column 2 / 3
-  margin-top -200px
-  &:before
-    content ''
-    size 367px
-    absolute left 130px top -250px
+  @media(min-width:1630px)
+    grid-column 2 / 3
+    margin-top -200px
+    &:before
+      content ''
+      size 367px
+      absolute left 130px top -250px
 
-    background url('./../assets/images/about-picture-18.png') no-repeat center/cover
+      background url('./../assets/images/about-picture-18.png') no-repeat center/cover
 .engineering-content-4
-  grid-column 4 / 4
-  margin-top -200px
-  &:before
-    content ''
-    size 475px 953px
-    absolute left -280px top -241px
-    background url('./../assets/images/about-picture-19.png') no-repeat center/cover
+  @media(min-width:1630px)
+    grid-column 4 / 4
+    margin-top -200px
+    &:before
+      content ''
+      size 475px 953px
+      absolute left -280px top -241px
+      background url('./../assets/images/about-picture-19.png') no-repeat center/cover
 .engineering-content
   position relative
   display grid
@@ -126,6 +133,7 @@ export default {
   size 278.93px
   position relative
   background url('./../assets/images/engineering-picture-8.png') no-repeat center/cover
+  z-index 1
 .engineering-picture-3
   size 278.93px
   position relative

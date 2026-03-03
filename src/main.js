@@ -25,6 +25,9 @@ import Notifications from 'vue-notification'
 window.jQuery = jQuery
 window.$ = jQuery
 
+
+
+
 require('@fancyapps/fancybox')
 
 axios.defaults.baseURL = 'https://zorge.yes-idea.ru/'
@@ -57,6 +60,7 @@ Vue.use(YmapPlugin, {
 })
 
 Vue.use(Loading)
+
 
 /* eslint-disable no-new */
 new Vue({

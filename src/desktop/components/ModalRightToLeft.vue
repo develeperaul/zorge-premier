@@ -1,8 +1,10 @@
 <template lang="pug"> .popup-modal(v-if="isOpened")
   .shadow(@click="close" :class="{'hiding': !visible}")
-  .wrapper(:class="{'hiding': !visible}"): smooth-scrollbar: .content
+  .wrapper(:class="{'hiding': !visible,'full': full} "): smooth-scrollbar: .content
     .top
       .title {{ title }}
+
+
     .body: slot
   .close-btn.icon-border(@click="close")
     svg: use(xlink:href="/static/sprite.svg#arrow-back")
@@ -10,7 +12,7 @@
 
 <script>
 export default {
-  props: ['title', 'className'],
+  props: ['title', 'className', 'full'],
   data: () => ({
     visible: false,
     isOpened: false
@@ -22,6 +24,7 @@ export default {
       this.$nextTick(() => {
         this.visible = true
       })
+
     },
     close () {
       document.body.style.overflow = 'auto';
@@ -93,6 +96,8 @@ export default {
   &.hiding
     transform translateX(100%)
     transition transform .15s ease-in-out
+.wrapper.full
+  max-width 100vw
 .content
   padding 25px
 .close-btn

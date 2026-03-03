@@ -2,8 +2,8 @@
   .location
     .location-top-bg
     title-circle Расположение
-    .second-title Основные <br>преимущества комфорта <br>для современного <br>горожанина
-    .location-list
+    //- .second-title Основные <br>преимущества комфорта <br>для современного <br>горожанина
+    //- .location-list
       .location-list__item(v-for="item in list") {{ item }}
     //- GmapMap(
     //-   ref="map"
@@ -35,7 +35,7 @@
         :class="{'map__tab--active':i === tabActive}"
         @click="tabSelect(i)"
       ) {{ tab.name }}
-    .location-circle
+    //- .location-circle
       .location-circle-image.location-circle-image--1
       .second-title Транспортная <br>доступность
       .location-circle__desc Расположение комплекса идеально: тихий центр, рядом большой лесной массив, в шаговой доступности крупные городские магистрали. Добраться до работы или выехать из города не составит труда.
@@ -189,7 +189,7 @@ export default {
   overflow hidden
 .location-top-bg
   size 100% 328px
-  background url('../assets/images/location-bg.jpg') no-repeat center bottom/cover
+  background url('/static/gallery/architecture/render-13.jpeg') no-repeat center bottom/cover
 .location-list
   color #b9b9b9
   line-height 1
@@ -286,7 +286,8 @@ export default {
   &--1
     background-size cover
     background-position: left
-    background-image url('../assets/images/location-circle-1.jpg')
+
+    background-image url(' ../assets/images/about-picture-29.png')
     border-radius: 50%
     &:before
       size 189px

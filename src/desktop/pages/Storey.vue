@@ -2,7 +2,7 @@
 .storey
   transition
     div.popup(v-if="hoverPath !== null" :style="{ left: popupCoords.left + 'px', top: popupCoords.top + 'px' }")
-      div.popup__title квартира №{{popupCoords.flat.id}}
+      div.popup__title квартира №{{popupCoords.flat.number}}
       div.popup__content
         div.popup__subtitle м2, площадь
         div.popup__value {{ popupCoords.flat.total_area }}
@@ -16,14 +16,17 @@
             svg.storey__svg(v-if="content.image_maps" xmlns="http://www.w3.org/2000/svg" :viewBox="viewBox" version="1.1" width="100%" height="100%")
               image(:xlink:href="currentStorey.image_maps[0].path" width="100%")
               g
-                path.storey__path(
-                      v-for="(flat, i) in currentStorey.image_maps[0].flats"
-                      :d="flat.polygon"
-                      :fill-opacity="hoverPath === i ? 0.5 : 0" :class="['svg-flat', flat.status]"
-                      @mousemove="pathHover($event, i, flat, 'over')"
-                      @mouseout="pathHover($event, i, flat, 'out')"
-                      @click="showFlat(flat.id)"
-                    )
+                template(v-for="(flat, i) in currentStorey.image_maps[0].flats")
+
+                  path.storey__path(
+                        v-if="flat.status !== 'sold'"
+                        :d="flat.polygon"
+                        :fill-opacity=" 0.5 "
+                         :class="['svg-flat', flat.status]"
+                        @mousemove="pathHover($event, i, flat, 'over')"
+                        @mouseout="pathHover($event, i, flat, 'out')"
+                        @click="showFlat(flat.id)"
+                      )
           .storey__street улица Рихарда Зорге
         .storey__left__row__col-2
           div
@@ -39,8 +42,15 @@
             .storey__liter-mini-wind-rose
               liters-mini(:value="houseId" @input="changeLiter")
               wind-rose.storey__wind-rose
-            proposed-page(:to="{ name: 'parking', query: { houseId } }" icon="parking" style="width: 100%")
-              span(style="font-size: 10px; letter-spacing: initial") выбрать паркинг
+            //- proposed-page(:to="{ name: 'parking', query: { houseId } }" icon="parking" style="width: 100%")
+            //-   span(style="font-size: 10px; letter-spacing: initial") выбрать паркинг
+          div(class="status-list")
+            div.sale
+              span  В продаже
+            div.book
+              span  Забронировано
+            div
+              span  Продано
           //- div
           //-   .storey__status
           //-     .storey__status__circle.free
@@ -73,11 +83,17 @@
             ) {{ storey[0] }}
         .storey-chess__col
           .storey-chess__line(v-for="storey in content.storeysDetailed")
-            .storey-chess__flat(
-              v-for="flat in storey.flats"
-              :class="[flat.status]"
-              @click="showFlat(flat)"
-              ) {{ flat }}
+            template(v-for="(flat ,indx) in  storey.image_maps[0].flats")
+              .storey-chess__flat(
+                v-if="flat.status !== 'sold'"
+                :class="[flat.status]"
+                @click="showFlat(flat.id)"
+                ) {{ searchFlat(flat.id, storey) }}
+              .storey-chess__flat(
+                v-else
+                :class="[flat.status]"
+                style="cursor:default"
+                ) {{ searchFlat(flat.id, storey) }}
   Flat(v-if="flatId" :flatId="flatId" @close="flatId = null")
   //- checkRoomsClass(flat.rooms_number) ? 'hidden' : ''
 </template>
@@ -130,7 +146,8 @@ export default {
     viewBox() {
       if(this.houseId === 3 && this.id === 26) return '0 0 1599 2138';
       else if(this.houseId === 3) return '0 0 574 768';
-      else return '0 0 1500 1206';
+      else if(this.houseId === 1 || this.houseId === 2) return '0 0 1500 1206';
+      else return '0 0 2560 1440';
     }
   },
   watch: {
@@ -165,6 +182,21 @@ export default {
     this.load(this.id)
   },
   methods: {
+    searchFlat(id, st) {
+      let number;
+      for (const key in st.flats) {
+        if (Object.prototype.hasOwnProperty.call(st.flats, key)) {
+          const element = st.flats[key];
+          if (element === id) {
+            number = key
+            break
+          }
+        }
+      }
+
+      return number
+
+    },
     async load(storeyId) {
       this.currentStorey = await this.getStorey(storeyId);
       await this.getData();
@@ -475,4 +507,31 @@ export default {
 
 .svg-flat
   cursor pointer;
+.status-list
+  color white
+  font-family: TT Commons
+  font-weight: 400
+  font-size: 14px
+  line-height: 197%
+  letter-spacing: 0%
+  display grid
+  gap 10px
+.status-list > div
+  display flex
+  align-items center
+  gap 12px
+.status-list > div::before
+  display block
+  content ''
+  width 30px
+  height 30px
+  border-radius 9999px
+  background transparent
+  border 1px solid #F6AC6D
+.status-list .sale::before
+  background #2E3541
+  border 1px solid #2E3541
+.status-list .book::before
+  background #B7875B
+  border 1px solid #B7875B
 </style>

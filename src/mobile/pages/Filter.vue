@@ -26,7 +26,7 @@
         v-for="(label, id) in housesMap"
         @click="filter.house_id = id"
       ): .cirlce-boxes__item__wrapper: .cirlce-boxes__item__wrapper__number {{ label }}
-  back-to(to="/parking" icon="parking" removeBack style="position: static; margin-bottom: 20px") Выбрать паркинг
+  //- back-to(to="/parking" icon="parking" removeBack style="position: static; margin-bottom: 20px") Выбрать паркинг
   .d-flex.justify-content-between.align-items-center(style="white-space:nowrap")
     .result(style="padding-right:0;")
       div Найдено:&nbsp;
@@ -49,7 +49,7 @@
         .col(:style="{'flex-basis':100/cols.length + '%'}") {{ item.storey_number }}
         .col(:style="{'flex-basis':100/cols.length + '%'}") {{ item.total_area }}
     back-to(to="/select" icon="filter") Подбор на фасаде
-  Flat(v-if="showedFlatId" :flatId="showedFlatId" :key="showedFlatId")
+  Flat(v-if="showedFlatId" :flatId="showedFlatId" :key="showedFlatId" @updateFlat="emitUpdateFlat")
 </template>
 
 <script>
@@ -146,6 +146,7 @@ export default {
       this.values = filterTemplateValuesInit();
     },
     setFilterSquare(value) {
+
       this.values.square = value;
       this.filter.total_area_min = value[0];
       this.filter.total_area_max = value[1];
@@ -175,6 +176,11 @@ export default {
       // setTimeout(() => {
       // }, 0);
     },
+    emitUpdateFlat(flat) {
+      console.log(flat.id);
+      this.onUpdateFlat(flat)
+
+    }
   },
 }
 </script>

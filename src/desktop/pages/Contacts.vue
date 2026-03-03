@@ -1,11 +1,12 @@
 <template lang="pug"> .contacts
   Logo
   .container
-    h1 Контакты
+    h1.contact-title Контакты
     .content(ref="content")
       .title Офис продаж:
       div(v-if="address" v-html="address") {{ address }}
-      div.comagic_phone(v-if="phone" @click="$VKGoal('contact')")
+      div(v-if="work_time" v-html="work_time")
+      div(v-if="phone" @click="$VKGoal('contact')")
         a(:href="`tel:${phone}`") {{ phone }}
       div(v-if="email")
         a(:href="`mailto:${email}`") {{ email }}
@@ -39,6 +40,7 @@ export default {
       options: 'map/options',
       address: 'contacts/address',
       phone: 'contacts/phone',
+      work_time: 'contacts/work_time',
       email: 'contacts/email',
       position: 'contacts/position'
     }),
@@ -46,7 +48,8 @@ export default {
       return Object.values(this.position);
     }
   },
-  async mounted () {
+  async mounted() {
+    console.log(this.phone)
     this.$store.commit('variables/yesidea', true)
     this.$store.commit('variables/footerBg', true)
     this.$store.commit('variables/footerShow', true)
@@ -66,6 +69,7 @@ export default {
       this.mapWidth = window.innerWidth - this.$refs.content.offsetLeft - this.$refs.content.clientWidth
     }
   }
+
 }
 </script>
 
@@ -84,14 +88,27 @@ h1
 .content
   color #fff
   width 325px
-  font-size 16px
-  line-height 1.4
+  font-size 19px
+  line-height 1.42
   padding-right 30px
+  font-weight 400
+  z-index 11
+  position relative
+.content a
+  color white
 .title
   font-size 20px
-  font-weight 600
+  line-height 142%
+  font-weight 400
   margin-bottom 30px
   letter-spacing .22em
   text-transform uppercase
   font-family 'Heading Pro Wide'
+.contact-title
+  z-index 11
+.map
+  max-width 1270px
+.container
+  @media(min-width 1530px)
+    padding 0 162px
 </style>

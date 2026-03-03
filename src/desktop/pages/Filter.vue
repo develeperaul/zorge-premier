@@ -15,8 +15,8 @@
                   @click="setFilterRooms(i)"
                 ) {{ i }}
                 .filter-panel__rooms__title.title Комнат
-              .col-md-5
-                proposed-page(v-show="filter.house_id" :to="{ name: 'parking', query: { houseId: filter.house_id } }" icon="parking" style="margin: 0;") выбрать паркинг
+              //- .col-md-5
+              //-   proposed-page(v-show="filter.house_id" :to="{ name: 'parking', query: { houseId: filter.house_id } }" icon="parking" style="margin: 0;") выбрать паркинг
             .row
               .col-md-5
                 .slider
@@ -29,7 +29,7 @@
                   vue-slider(:value="values.storey" @change="setFilterStorey" lazy :min="2" :max="23" :tooltip="'always'")
           .filter-panel__right
             .filter-panel__right__title.title Литер
-            liters-mini(v-model="filter.house_id")
+            liters-mini(v-model="filter.house_id" fill)
         .filter-panel__line.align-items-center
           .filter-panel__left
             .filter-panel__result Найдено:&nbsp;

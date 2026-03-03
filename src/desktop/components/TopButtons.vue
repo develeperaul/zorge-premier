@@ -1,4 +1,4 @@
-<template lang="pug"> .top-right-panel
+<template lang="pug"> .top-right-panel(:style="{ top: $route.name === 'Главная' ? '100px': '25px'}")
   .icon-border(@click="toggleMenu"): svg: use(xlink:href="/static/sprite.svg#hamburger")
   router-link.icon-border(to="/select" exact): svg: use(xlink:href="/static/sprite.svg#key")
   //.icon-border: svg: use(xlink:href="/static/sprite.svg#3d-box")

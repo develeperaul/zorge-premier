@@ -2,8 +2,8 @@ export default {
   namespaced: true,
   state: {
     phone: {
-      text: '+7 (347) 289-90-05',
-      href: '83472899005'
+      text: '+7 (347) 266-87-05',
+      href: '83472668705'
     },
     socs: {
       // facebook: 'https://www.facebook.com/gkjsinvest/',

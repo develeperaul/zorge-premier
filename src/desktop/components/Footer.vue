@@ -2,11 +2,14 @@
     :class="{'footer--static':static, 'footer--index-102':yesideaIndex102, 'footer--bg':bg}"
   )
   .container: .position-relative: .footer__container
-    div
+    div.footer__left
+      a.footer__jsi(href="https://js-invest.ru/" target="_blank"): svg: use(xlink:href="/static/sprite.svg#logo-jsi")
       .footer__desc © 1994-#{new Date().getFullYear()} ООО ГК «Жилстройинвест» <br>
         | Материалы сайта не являются публичной офертой. <br>
-        .footer__private-police(@click="openPrivatePolice") Политика конфиденциальности
-      a.footer__jsi(href="https://js-invest.ru/" target="_blank"): svg: use(xlink:href="/static/sprite.svg#logo-jsi")
+        div(style="margin-bottom: 5px")
+          a.footer__private-police(href='/static/pol.pdf' target="_blank") Политика конфиденциальности
+        div
+          a.footer__private-police(href='/static/sog.pdf' target="_blank") Согласие на обработку персонаольных данных
     .footer__socs
       a.footer__soc(
         v-for="(href,key) in socs"
@@ -17,11 +20,14 @@
     a.yesidea(href="https://yes-idea.ru/" target="_blank" v-if="yesidea !== false")
       | сделано в
       svg: use(xlink:href="/static/sprite.svg#yesidea")
+  //- Cookies(@openPol="openPrivatePolice")
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Cookies from '@/components/cookies'
 export default {
+  components: { Cookies },
   props: [ 'static' ],
   computed: mapGetters({
     yesideaIndex102: 'variables/yesideaIndex102',
@@ -51,6 +57,10 @@ export default {
   fixed bottom 0 left 0
   +below(1800px)
     padding 20px 0 15px
+  &__left
+    display flex
+    align-items center
+    gap 67px
   &__private-police
     line-height 1
     margin-top 5px
@@ -94,9 +104,7 @@ export default {
   &__soc + &__soc
     margin-left 6px
   &__jsi
-    position absolute
-    top calc(50% - 10px)
-    right calc(100% + 45px)
+
     +below(1800px)
       position static
     svg

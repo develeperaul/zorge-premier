@@ -107,3 +107,135 @@
 
 .fancybox-thumbs__list a:before
   border 3px solid #f6ac6d
+.list-st
+  display grid
+  padding-left 18px
+  @media (max-width:1024px)
+    justify-content center
+
+
+.bottom-right-panel
+    z-index 103
+    fixed bottom 55px right 80px
+    +below(1800px)
+      bottom 85px
+    +below(1700px)
+      right 35px
+.custom-form__agree
+  line-height 1
+  font-weight 300
+  font-size .75rem
+  padding-left 20px
+  position relative
+  color rgba(255, 255, 255, .75)
+  a
+    color #f6ac6d
+  &:before
+    content ''
+    position absolute
+    left 0
+    top 0
+    width 13px
+    height 13px
+    border 1px solid rgba(255, 255, 255, .7)
+  &:after
+    content ''
+    position absolute
+    left 5px
+    top 2px
+    width 4px
+    height 8px
+    transform rotate(45deg)
+    border-right 2px solid #f6ac6d
+    border-bottom 2px solid #f6ac6d
+    opacity 0
+    transition opacity .15s
+
+.custom-form__checkbox
+  position absolute
+  left 0
+  top 0
+  width 13px
+  height 13px
+  opacity 0
+  cursor pointer
+
+.custom-form__checkbox:checked + .custom-form__agree:after
+  opacity 1
+
+.exclusive-openblock
+  background #F6AC6D
+  color #1F252F
+  font-family 'Heading Pro Wide'
+  text-transform uppercase
+  font-weight 600
+  font-size 12px
+  line-height 18px
+  display grid
+  gap 10px
+  padding-block 16px
+  padding-inline 16px
+  position relative
+  z-index 10
+  overflow hidden
+  &__btn
+    font-family 'Heading Pro Wide'
+    letter-spacing 0.22em
+    display inline-flex
+    gap 10px
+    svg
+      height 16px
+      width 38px
+  & > *
+    position relative
+    z-index 1
+  &__circle
+    position absolute
+    z-index 0
+    & img
+      width 100%
+      height 100%
+    &-1
+      width 291.4978665840148px
+      height 176.90135363673699px
+      right -20px
+      top -30px
+    &-2
+      width 253.4063304348962px
+      height 302.8879138850838px
+      right -78px
+      bottom -182px
+    &-3
+        display none
+
+  @media (min-width: 1024px)
+    font-size 16px
+    padding-inline 49px
+    display flex
+    justify-content space-between
+    align-items center
+
+    &__btn
+      gap 32px
+      background #1F252F
+      color #F6AC6D
+      padding 16px 20px
+      border-radius 62px
+      width fit-content
+      cursor pointer
+    &__circle
+      &-1
+        width 710.0330879102315px
+        height 430.89792286159724px
+        right 515px
+        top -200px
+      &-2
+        display none
+      &-3
+        display block
+        width 617.2493835344864px
+        height 374.59020625056326px
+        right -12px
+        bottom -121px
+        transformt rotate(80deg)
+
