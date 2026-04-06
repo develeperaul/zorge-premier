@@ -8,6 +8,7 @@ import Videos from '../desktop/pages/Videos'
 import Filter from '../desktop/pages/Filter'
 import Select from '../desktop/pages/Select'
 import Storey from '../desktop/pages/Storey'
+import Flat from '../desktop/pages/Flat'
 import Parking from '../desktop/pages/Parking'
 import ApartmentConcepts from '../desktop/pages/ApartmentConcepts'
 import Engineering from '../desktop/pages/Engineering'
@@ -22,6 +23,7 @@ import MobileGallery from '../mobile/pages/Gallery'
 import MobileLocation from '../mobile/pages/Location'
 import MobileSelect from '../mobile/pages/Select'
 import MobileStorey from '../mobile/pages/Storey'
+import MobileFlat from '../mobile/pages/Flat'
 import MobileParking from '../mobile/pages/Parking'
 import MobileFilter from '../mobile/pages/Filter'
 import MobileBuilding from '../mobile/pages/Building'
@@ -44,6 +46,7 @@ const pages = () => {
       'Filter': MobileFilter,
       'Select': MobileSelect,
       'Storey': MobileStorey,
+      'Flat': MobileFlat,
       'Parking': MobileParking,
       'ApartmentConcepts': MobileApartmentConcepts,
       'Engineering': MobileEngineering,
@@ -63,6 +66,7 @@ const pages = () => {
       Filter,
       Select,
       Storey,
+      Flat,
       Parking,
       ApartmentConcepts,
       Engineering,

@@ -1,7 +1,8 @@
 <template lang="pug"> .developer
   Logo
   .container
-    //- h1 «Жилстройинвест»
+    MortgageCalculator
+    //- h1 «Жилстройинвест Девелопмент»
     div(ref="content"): .h-100
         //- div(v-html="content")
         h1 Документы
@@ -11,12 +12,14 @@
           .developer-link__text Положение об антикоррупционной политике
         a.developer-link(href="/static/3.pdf" target="_blank")
           .developer-link__text Положение об обмене деловыми подарками и знаками делового гостеприимства
+
 </template>
 <script>
 import Logo from '../components/Logo'
+import MortgageCalculator from '../../components/MortgageCalculator.vue';
 import {mapGetters} from 'vuex'
 export default {
-  components: {Logo},
+  components: {Logo,MortgageCalculator},
   data: () => ({
     width: 0,
     indexActive: null

@@ -1,6 +1,12 @@
 <template lang="pug"> .about
   ScrollPage(:title="title" ref="scrollbar" isBtn @open="openPopup")
-    proposed-page(to="/select") Выбор квартир
+    //- proposed-page(to="/select") Выбор квартир
+    div(style="relative")
+      MainSlider
+      router-link.logo(style=" position: absolute; left: 32px; z-index: 1; top: 24px" to="/" exact): img(src="./../../assets/svg/logo.svg" )
+    .about-content-0(style="background-image: url('/static/about.jpg')")
+      .container
+        .about-content-0__title О проекте
     .container
       .about-content.about-content-1.mb-5.align-items-center
         div.content
@@ -176,8 +182,9 @@ import ScrollPage from './ScrollPage'
 import ModalOther from './ModalOther'
 import ProposedPage from '../components/ProposedPage'
 import VideoCarousel from '../components/VideoCarousel/VideoCarousel.vue'
+import MainSlider from '@/components/MainSlider.vue'
 export default {
-  components: { ScrollPage, ModalOther, ProposedPage,VideoCarousel },
+  components: { ScrollPage, ModalOther, ProposedPage,VideoCarousel, MainSlider },
   data: () => ({
     openVideo:false,
     items: [
@@ -233,6 +240,36 @@ export default {
   gap 29px
 .content .text
   color #B9B9B9
+.about-content-0
+  background-position center
+  background-size cover
+  background-repeat no-repeat
+  height 100vh
+  display grid
+  padding-bottom 102px
+  position relative
+  &::before
+    content: ''
+    position absolute
+    bottom 0
+    left 0
+    height 430px
+    width 100%
+    z-index 1
+    background: linear-gradient(0deg, #1F252F 0%, rgba(31, 37, 47, 0) 100%);
+  .container
+    position relative
+  &__title
+    color: #F6AC6D;
+    font-size 49px
+    line-height 100%
+    font-family 'Heading Pro Wide'
+    position absolute
+    bottom 82px
+    font-weight 700
+    z-index 2
+    text-transform uppercase
+    letter-spacing 0.22em
 @media(min-width 1530px)
   .about-content-1 .content
     max-width 620px

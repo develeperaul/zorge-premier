@@ -8,7 +8,11 @@ export default {
     socs: {
       // facebook: 'https://www.facebook.com/gkjsinvest/',
       // instagram: 'https://www.instagram.com/gkjsi/',
-      vkontakte: 'https://vk.com/jsinvest'
+      tg: ' https://t.me/gk_jsi',
+      other: 'https://dzen.ru/js_invest',
+      max: 'https://vk.com/jsinvest',
+      vk: 'https://vk.com/jsinvest',
+      rutube: 'https://rutube.ru/channel/16319833/'
     }
   },
   mutations: {},

@@ -8,7 +8,9 @@ export default {
     data: {}
   },
   actions: {
-    async getData ({dispatch, getters, commit}, id = null) {
+    async getData({ dispatch, getters, commit }, id = null) {
+
+
       if (!getters.data.hasOwnProperty(id)) {
         const events = await dispatch('events/getData', null, {root: true})
         if (events.filter(item => item.id === Number(id)).length) {

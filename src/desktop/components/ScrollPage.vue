@@ -1,5 +1,5 @@
 <template lang="pug"> .scroll-page: smooth-scrollbar(ref="scrollbar")
-  .first-section(:style="style")
+  //- .first-section(:style="style")
     div(v-if="isBtn" class="first-section__btn" @click="()=>$emit('open')")
       img(src="/static/popup-icon.png")
     Logo
@@ -99,7 +99,7 @@ export default {
 .main-section
   color #fff
   overflow hidden
-  padding 100px 0 0
+  // padding 100px 0 0
   background-color #1F252F
 .subtitle
   font-weight 600

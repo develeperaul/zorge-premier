@@ -80,8 +80,8 @@ export default {
   height: auto !important;
   position: relative !important;
 }
-.vc-m--btn {
+/* .vc-m--btn {
   top: 75px !important;
   bottom: auto !important;
-}
+} */
 </style>

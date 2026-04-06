@@ -31,7 +31,7 @@
       ) {{ phone.text }}
       .icon-bg
         svg: use(xlink:href="/static/sprite.svg#phone")
-  Footer(v-if="footerShow")
+  Footer(v-if="footerShow" :datad="$route.path" :static="$route.meta.static")
   notifications
 
 

@@ -7,11 +7,13 @@
     .curtains-arrow-bottom(@click="scrollToAboutSection"): svg: use(xlink:href="/static/sprite.svg#arrow-bottom")
 
   .about(ref="about")
+    //- div(style=" padding-top: 185px")
+    MainSlider
     .about-image
       //- .main-title(style="margin-top:0;padding-top:90px;")
         //- span «Зорге.Премьер» - квартиры в домах премиум-класса <br> в Уфе.
         //- .main-title__circle-1
-      div( class="first-section__btn" @click="open")
+      //- div( class="first-section__btn" @click="open")
         img(src="/static/popup-icon.png")
     .about-collage-1
       div.main-title-other
@@ -189,14 +191,15 @@
           //- proposed-page(to="/select") Подбор на фасаде
           a(href="https://zorge-premier.ru/events/14").popup-modal__btn
             svg: use(xlink:href="/static/sprite.svg#arrow-horizontal-long")
-            | Подробнее
+            |
 </template>
 
 <script>
 import ModalOther from '../components/ModalOther'
 import VideoCarousel from '../components/VideoCarousel/VideoCarousel.vue'
+import MainSlider from '@/components/MainSlider.vue'
 export default {
-  components: {ModalOther,VideoCarousel},
+  components: {ModalOther,VideoCarousel,MainSlider},
   data: () => ({
     openVideo: false,
     items: [
@@ -220,23 +223,23 @@ export default {
 
 
 
-    const blockTime = localStorage.getItem('blockTime');
-		if(this.$refs.popupModal){
-			if (blockTime !== null) {
-					// Сверяем время блокировки с текущим временем
-					if (+new Date() >= parseInt(blockTime)) {
-						// Если время блокировки вышло, то очищаем localStorage
-						localStorage.removeItem('blockTime');
-						this.openPopupModal()
-					} else {
-						popupModal.classList.remove('active');
-						// Иначе скрываем элемент
-						console.log('activess');
-					}
-			} else {
-				this.openPopupModal()
-			}
-		}
+    // const blockTime = localStorage.getItem('blockTime');
+		// if(this.$refs.popupModal){
+		// 	if (blockTime !== null) {
+		// 			// Сверяем время блокировки с текущим временем
+		// 			if (+new Date() >= parseInt(blockTime)) {
+		// 				// Если время блокировки вышло, то очищаем localStorage
+		// 				localStorage.removeItem('blockTime');
+		// 				this.openPopupModal()
+		// 			} else {
+		// 				popupModal.classList.remove('active');
+		// 				// Иначе скрываем элемент
+		// 				console.log('activess');
+		// 			}
+		// 	} else {
+		// 		this.openPopupModal()
+		// 	}
+		// }
 
     }, 500)
     setTimeout(() => {

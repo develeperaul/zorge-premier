@@ -6,7 +6,8 @@ export default {
   state: {
     items: [],
     years: [],
-    yearActive: ''
+    yearActive: '',
+    slides: []
   },
   actions: {
     async getData ({commit, getters}, update = false) {
@@ -33,6 +34,26 @@ export default {
         commit('setItems', data.sort((a, b) => new Date(b.created) - new Date(a.created)))
       }
       return data
+    },
+    async getDataSlide ({commit, getters}, update = false) {
+      let data = getters.data
+      if (!data || update) {
+        const result = await axios.get('api/v2/anonymouses/articles', {params: {categoryId: 4}})
+        data = result.data.data.map(item => {
+
+          const text = item.preview === '-' ? ''  : item.preview
+          return {
+            id: item.id,
+            img: item.previewImageUrl,
+            title: item.name,
+            link: item.place,
+            text
+          }
+        })
+        commit('setSlide', data)
+
+      }
+      return data
     }
   },
   mutations: {
@@ -44,11 +65,16 @@ export default {
     },
     setYearActive (state, payload) {
       state.yearActive = payload
+    },
+    setSlide(state, payload) {
+
+      state.slides = payload
+      console.log(state.slides[0].img);
     }
   },
   getters: {
     years: ({years}) => years,
     yearActive: ({yearActive}) => yearActive,
-    items: ({items, yearActive}) => items.filter(({year}) => year === yearActive)
+    items: ({items, yearActive}) => items.filter(({year}) => year === yearActive),
   }
 }

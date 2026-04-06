@@ -247,8 +247,10 @@ export default {
         this.checkedRooms.push(number)
       }
     },
-    showFlat (_flatId) {
-      this.flatId = _flatId;
+    showFlat(_flatId) {
+
+      this.$router.push('/select/' + this.id + '/' + _flatId )
+      // this.flatId = _flatId;
     },
     pathHover (e, i, flat, type) {
       if(type === 'over') {

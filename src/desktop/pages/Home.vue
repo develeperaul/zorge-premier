@@ -18,7 +18,9 @@
         img(src="/static/exclusive/circle3.svg")
 
     ModalFull(ref="modalfull" )
+
     .home
+
       .wrapper()
         .curtains
           //- transition(name="fade-05"): .content(v-if="contentVisible.home && $parent.emptyHistory")
@@ -50,6 +52,7 @@
             //-   :style="{opacity:videoVisible.cycle ? '1' : '0'}"
             //-   @loadedmetadata="videoLoaded('cycle')"
             //- )
+
         transition(name="fade-05"): About.about(v-if="contentVisible.about || !$parent.emptyHistory")
 
         div.popup-modal(ref="popupModal")
@@ -76,10 +79,10 @@ import NextSection from '../components/NextSection'
 import ProposedPage from '../components/ProposedPage'
 import { mapGetters } from 'vuex'
 import ModalFull from '@/components/ModalFull.vue'
-
+import MainSlider from '@/components/MainSlider.vue'
 
 export default {
-  components: { About, NextSection,ProposedPage, ModalFull },
+  components: { About, NextSection,ProposedPage, ModalFull, MainSlider },
   data: () => ({
     videoStatusLoaded: {
       cycle: false,
@@ -96,22 +99,22 @@ export default {
 
 
     const blockTime = localStorage.getItem('blockTime');
-		if(this.$refs.popupModal){
-			if (blockTime !== null) {
-					// Сверяем время блокировки с текущим временем
-					if (+new Date() >= parseInt(blockTime)) {
-						// Если время блокировки вышло, то очищаем localStorage
-						localStorage.removeItem('blockTime');
-						this.openPopupModal()
-					} else {
-						popupModal.classList.remove('active');
-						// Иначе скрываем элемент
-						console.log('activess');
-					}
-			} else {
-				this.openPopupModal()
-			}
-		}
+		// if(this.$refs.popupModal){
+		// 	if (blockTime !== null) {
+		// 			// Сверяем время блокировки с текущим временем
+		// 			if (+new Date() >= parseInt(blockTime)) {
+		// 				// Если время блокировки вышло, то очищаем localStorage
+		// 				localStorage.removeItem('blockTime');
+		// 				this.openPopupModal()
+		// 			} else {
+		// 				popupModal.classList.remove('active');
+		// 				// Иначе скрываем элемент
+		// 				console.log('activess');
+		// 			}
+		// 	} else {
+		// 		this.openPopupModal()
+		// 	}
+		// }
 
     }, 500)
 

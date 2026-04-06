@@ -171,8 +171,10 @@ export default {
       this.loaderHide();
     },
     onUpdateFlat(flat) {
+      // this.showedFlatId = flat.id;
+
+      this.$router.push('/select/' + this.$route.query.storeyId + '/' + flat.id )
       // this.showedFlatId = null;
-      this.showedFlatId = flat.id;
       // setTimeout(() => {
       // }, 0);
     },

@@ -69,17 +69,24 @@ const router = new Router({
       meta: { title: 'Выбор этажа' }
     },
     {
+      path: '/select/:storeyId/:flatId',
+      name: 'Просмотр квартиры',
+      component: pages.Flat,
+      meta: { title: 'Просмотр квартиры',static: true }
+    },
+    {
       path: '/select/:storeyId',
       name: 'Выбор квартиры',
       component: pages.Storey,
-      meta: { title: 'Выбор квартиры' }
+
+      meta: { title: 'Выбор квартиры', static: true }
     },
-    {
-      path: '/select/:storeyId/:flatId',
-      name: 'Просмотр квартиры',
-      component: pages.Storey,
-      meta: { title: 'Просмотр квартиры' }
-    },
+    // {
+    //   path: '/select/:storeyId/:flatId',
+    //   name: 'Просмотр квартиры',
+    //   component: pages.Storey,
+    //   meta: { title: 'Просмотр квартиры' }
+    // },
     {
       path: '/parking',
       name: 'parking',

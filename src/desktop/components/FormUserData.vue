@@ -23,10 +23,10 @@
           id="cellphone"
         )
       .col-md-12.form-group
-          label.custom-form__label(for="summ") 3+4 = ?
+          label.custom-form__label(for="summ") Укажите ответ
           .position-relative: input.form-control.custom-form__control(
             type="number"
-            placeholder="3+4"
+            placeholder="3+4=?"
             v-model="form.summ"
             id="summ"
           )
