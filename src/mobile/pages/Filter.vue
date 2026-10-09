@@ -49,7 +49,7 @@
         .col(:style="{'flex-basis':100/cols.length + '%'}") {{ item.storey_number }}
         .col(:style="{'flex-basis':100/cols.length + '%'}") {{ item.total_area }}
     back-to(to="/select" icon="filter") Подбор на фасаде
-  Flat(v-if="showedFlatId" :flatId="showedFlatId" :key="showedFlatId" @updateFlat="emitUpdateFlat")
+  Flat(v-if="showedFlatId" :flatId="showedFlatId" :key="showedFlatId" @updateFlat="emitUpdateFlat" :openprice="$route.meta.openprice")
 </template>
 
 <script>

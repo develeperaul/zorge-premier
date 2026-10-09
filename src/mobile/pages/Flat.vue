@@ -38,7 +38,7 @@
               span {{ flat.total_area }} м
                 sup 2
               span площадь
-            .item.item__other
+            //- .item.item__other
               span {{ format((+flat.price).toFixed(0)) }} ₽
               //- span В ипотеку от
               //-   a(href="mor")  90 728 ₽/мес

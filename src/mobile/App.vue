@@ -214,7 +214,7 @@ export default {
     color rgba(255, 255, 255, .7)
   &__jsi svg
     fill #fff
-    size 204px 20px
+    size 221px 32px
     margin-bottom 10px
   &__desc
     color #b9b9b9

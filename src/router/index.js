@@ -57,6 +57,12 @@ const router = new Router({
       meta: { title: 'Подбор квартир' }
     },
     {
+      path: '/foragents',
+      name: 'Подбор квартир',
+      component: pages.ForAgent,
+      meta: { title: 'Подбор квартир', isProtected: true, openprice: true }
+    },
+    {
       path: '/filter/:set',
       name: 'Квартиры 360',
       component: pages.Filter,
@@ -72,21 +78,14 @@ const router = new Router({
       path: '/select/:storeyId/:flatId',
       name: 'Просмотр квартиры',
       component: pages.Flat,
-      meta: { title: 'Просмотр квартиры',static: true }
+      meta: { title: 'Просмотр квартиры', static: true }
     },
     {
       path: '/select/:storeyId',
       name: 'Выбор квартиры',
       component: pages.Storey,
-
       meta: { title: 'Выбор квартиры', static: true }
     },
-    // {
-    //   path: '/select/:storeyId/:flatId',
-    //   name: 'Просмотр квартиры',
-    //   component: pages.Storey,
-    //   meta: { title: 'Просмотр квартиры' }
-    // },
     {
       path: '/parking',
       name: 'parking',
@@ -173,6 +172,21 @@ router.beforeEach((to, from, next) => {
   }, 200)
 })
 
+// После каждого перехода проверяем, нужно ли скрыть лоадер для защищенных страниц
+router.afterEach((to) => {
+  // Если это защищенная страница, лоадер скроется в ProtectedView
+  if (to.meta.isProtected) {
+    // Не скрываем лоадер сразу, даем время ProtectedView инициализироваться
+    setTimeout(() => {
+      const isAuthenticated = sessionStorage.getItem('agent_authenticated') === 'true'
+      if (!isAuthenticated && Vue.prototype.loaderHide) {
+        // Если пользователь не авторизован, скрываем лоадер через 300мс
+        Vue.prototype.loaderHide()
+      }
+    }, 300)
+  }
+})
+
 Vue.prototype.loaderShow = loaderShow
 
 Vue.prototype.loaderHide = () => {
@@ -182,7 +196,9 @@ Vue.prototype.loaderHide = () => {
     selector.classList.add('vld-overlay--hide')
     Vue.nextTick(() => {
       setTimeout(() => {
-        leader.hide()
+        if (leader && leader.hide) {
+          leader.hide()
+        }
         const overlay = document.querySelector('.vld-overlay')
         if (overlay) {
           overlay.remove()

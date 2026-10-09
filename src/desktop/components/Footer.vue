@@ -148,7 +148,7 @@ export default {
       position static
     svg
       fill #fff
-      size 220px 20px
+      size 221px 32px
 .yesidea
   color #fff
   font-size 9.17px

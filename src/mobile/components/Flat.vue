@@ -33,7 +33,7 @@
         .flat-attr__value {{ flat.total_area }}
         .flat-attr__name м2, площадь
     .flat-attrs(v-if="flat.status !== 'sold'")
-      .flat-attr
+      .flat-attr(v-if="openprice")
         .flat-attr__value {{ flat.price.split('.')[0].match(/.{1,3}(?=(.{3})*$)/g).join(' ') }}
         .flat-attr__name руб, стоимость
     //- .flat-image: .flat-image__wrapper: img(:src="storey.image_maps[0] && storey.image_maps[0].path" style="max-width: 100%")

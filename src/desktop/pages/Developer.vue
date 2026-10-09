@@ -1,7 +1,7 @@
 <template lang="pug"> .developer
   Logo
   .container
-    h1 «Жилстройинвест Девелопмент»
+    h1 «Жилстройинвест <br> Девелопмент»
     .content(ref="content"): .h-100: smooth-scrollbar: .h-100.pr-4
       div(v-html="content")
       a.developer-link(v-if="link" :href="link.href" target="_blank")

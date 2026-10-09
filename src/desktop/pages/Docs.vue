@@ -1,7 +1,7 @@
 <template lang="pug"> .developer
   Logo
   .container
-    MortgageCalculator
+    //- MortgageCalculator
     //- h1 «Жилстройинвест Девелопмент»
     div(ref="content"): .h-100
         //- div(v-html="content")

@@ -43,6 +43,7 @@ export default {
     return {
 
       swiperOptions: {
+        loop: true,
         observer: true,
         observeParents: true,
         touchStartPreventDefault: false,

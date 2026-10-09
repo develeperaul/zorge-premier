@@ -23,9 +23,10 @@
           .flat__attr
             .flat__attr__value {{ flat.total_area }}
             .flat__attr__title м2, площадь
-          .flat__attr
-            .flat__attr__value {{ format((+flat.price).toFixed(0)) }}
-            .flat__attr__title руб, стоимость
+          .flat__attr()
+            template(v-if="openprice")
+              .flat__attr__value() {{ format((+flat.price).toFixed(0)) }}
+              .flat__attr__title() руб, стоимость
           //- .flat__attr(v-if="flat.status !== 'sold'")
           //-   div
           //-     div(:style="{'font-weight': '600', 'margin-top': '20px', 'font-size': '30px', 'text-transform': 'uppercase'}") {{ flat.price.split('.')[0].match(/.{1,3}(?=(.{3})*$)/g).join(' ') }}
@@ -97,6 +98,10 @@ export default {
     flatId: {
       required: true,
       type: Number
+    },
+    openprice: {
+      required: false,
+
     }
   },
   data: () => ({

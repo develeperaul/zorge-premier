@@ -49,7 +49,7 @@
           img(alt src="./../assets/images/about-picture-16.png")
           .filter-picture__name Инженерия
     Footer(:static="true")
-  Flat(v-if="flatShowed" :flatId="flatShowed.id")
+  Flat(v-if="flatShowed" :flatId="flatShowed.id" :openprice="$route.meta.openprice")
 </template>
 
 <script>
